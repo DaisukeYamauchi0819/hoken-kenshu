@@ -122,10 +122,10 @@ li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em}
 </div>
 <script>
 document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
-if(sessionStorage.getItem('kisochisiki-auth')==='ok')document.getElementById('pw-gate').style.display='none';
+if(sessionStorage.getItem('kisochishiki-auth')==='ok')document.getElementById('pw-gate').style.display='none';
 function checkPw(){
-  if(document.getElementById('pw-input').value==='kisochisiki'){
-    sessionStorage.setItem('kisochisiki-auth','ok');
+  if(document.getElementById('pw-input').value==='kisochishiki'){
+    sessionStorage.setItem('kisochishiki-auth','ok');
     document.getElementById('pw-gate').style.display='none';
   } else {
     document.getElementById('pw-err').textContent='パスワードが違います';
