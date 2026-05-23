@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第4回 | 保険基礎知識研修</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#85ccca;--bd:#2d8a87;--bdd:#1a5e5c;--bl:#e0f5f5;--bll:#f0fafa;
+  --amber:#f59e0b;--al:#fef3c7;
+  --green:#059669;--gl:#d1fae5;
+  --text:#0f172a;--text-2:#334155;--muted:#64748b;
+  --bg:#fff;--surface:#f8fafa;--border:#d4eeee;
+}
+body{font-family:system-ui,-apple-system,'Hiragino Sans','Yu Gothic UI',sans-serif;background:#daeeed;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+.deck{width:min(1100px,94vw);aspect-ratio:16/9;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:14px;border:2.5px solid var(--brand);overflow:hidden}
+.slide{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:all}
+.bar{height:4px;background:var(--brand);flex-shrink:0}
+strong{font-weight:700}
+
+/* Logo */
+.logo-title{height:clamp(50px,7vw,80px);opacity:.85}
+.logo-mk{position:absolute;top:.35rem;right:.7rem;height:clamp(14px,1.8vw,20px);opacity:.45}
+
+/* Title */
+.s-title{background:#fff;justify-content:center;align-items:center;gap:.85rem;text-align:center;padding:2.5rem 3rem}
+.badge{background:var(--bll);color:var(--bd);padding:.35rem 1.2rem;border-radius:99px;font-size:clamp(.78rem,1.2vw,.92rem);letter-spacing:.04em;border:1.5px solid var(--brand);font-weight:500}
+.s-title h1{color:var(--text);font-size:clamp(1.6rem,3.5vw,2.7rem);font-weight:700;line-height:1.3}
+.s-title .meta{color:var(--muted);font-size:clamp(.82rem,1.3vw,.98rem)}
+
+/* Section */
+.s-section{background:var(--bl);justify-content:flex-end;padding:2.5rem 3rem;gap:.55rem;border-left:6px solid var(--brand)}
+.s-section .ch{color:var(--bd);font-size:clamp(.72rem,1.1vw,.88rem);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.s-section h2{color:var(--bdd);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.3}
+
+/* Content */
+.s-content{padding:1.4rem 2.4rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:.75rem}
+.s-content>h2{color:var(--bdd);font-size:clamp(1.05rem,1.9vw,1.45rem);font-weight:700;padding-bottom:.55rem;border-bottom:2.5px solid var(--brand);flex-shrink:0}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.6rem}
+
+ul{list-style:none;display:flex;flex-direction:column;gap:.48rem}
+li{display:flex;align-items:baseline;gap:.55rem;font-size:clamp(.9rem,1.45vw,1.1rem);line-height:1.6;color:var(--text)}
+li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em}
+.sub li::before{content:'–';color:var(--muted)}
+.sub{padding-left:1.2rem}
+
+.grid{display:grid;gap:.75rem}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.card h3{font-size:clamp(.88rem,1.38vw,1.08rem);font-weight:700;color:var(--bdd);margin-bottom:.38rem}
+.card p,.card li{font-size:clamp(.8rem,1.22vw,.94rem);color:var(--text-2);line-height:1.52}
+.card.ac{border-color:var(--brand);background:var(--bll)}
+.card.ac h3{color:var(--bd)}
+.card.am{border-color:var(--amber);background:var(--al)}
+.card.am h3{color:#92400e}
+.card.gr{border-color:var(--green);background:var(--gl)}
+.card.gr h3{color:var(--green)}
+
+.box-a{background:var(--al);border-left:4px solid var(--amber);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-b{background:var(--bll);border-left:4px solid var(--brand);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-g{background:var(--gl);border-left:4px solid var(--green);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+
+.goal-list{display:flex;flex-direction:column;gap:.6rem}
+.goal{display:flex;align-items:center;gap:.85rem;background:var(--bll);padding:.8rem 1.1rem;border-radius:10px;border:1.5px solid var(--border)}
+.gn{min-width:1.8rem;height:1.8rem;background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+.goal p{font-size:clamp(.9rem,1.45vw,1.1rem);color:var(--text);line-height:1.5}
+
+/* Flow */
+.flow{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.flow-item{background:var(--bdd);color:#fff;padding:.38rem .85rem;border-radius:6px;font-size:clamp(.7rem,1.1vw,.82rem);font-weight:600;white-space:nowrap}
+.flow-arrow{color:var(--muted);font-size:1rem;flex-shrink:0}
+
+/* Key items */
+.key-item{display:flex;align-items:flex-start;gap:.65rem;padding:.65rem .9rem;background:var(--surface);border-radius:8px;border:1.5px solid var(--border)}
+.key-num{min-width:1.8rem;height:1.8rem;background:var(--bdd);color:#fff;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;flex-shrink:0}
+.key-item p{font-size:clamp(.88rem,1.4vw,1.02rem);color:var(--text);line-height:1.5}
+
+/* Final slide */
+.s-final{background:var(--bl);justify-content:center;align-items:center;gap:1.2rem;text-align:center;padding:3rem;border-left:6px solid var(--brand)}
+.s-final h2{color:var(--bdd);font-size:clamp(1.7rem,3.3vw,2.6rem);font-weight:700}
+.s-final p{color:var(--bd);font-size:clamp(.86rem,1.4vw,1.02rem)}
+.s-final .steps{display:flex;flex-direction:column;gap:.5rem;text-align:left}
+.step{display:flex;align-items:center;gap:.75rem;background:rgba(133,204,202,.12);border:1px solid var(--border);padding:.6rem 1rem;border-radius:8px}
+.step-dot{width:.5rem;height:.5rem;background:var(--brand);border-radius:50%;flex-shrink:0}
+.step p{color:var(--bdd);font-size:clamp(.82rem,1.3vw,.96rem)}
+
+/* QA */
+.s-qa{background:var(--bl);justify-content:center;align-items:center;gap:1rem;text-align:center;border-left:6px solid var(--brand)}
+.s-qa h2{color:var(--bdd);font-size:clamp(2rem,4vw,3.2rem);font-weight:700}
+.s-qa p{color:var(--bd);font-size:clamp(.9rem,1.45vw,1.1rem)}
+
+/* Nav */
+.nav{display:flex;align-items:center;gap:1rem}
+.btn{width:2.4rem;height:2.4rem;background:rgba(133,204,202,.15);border:1.5px solid rgba(133,204,202,.5);color:var(--bd);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.btn:hover{background:rgba(133,204,202,.3)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.cnt{color:var(--bd);font-size:.82rem;min-width:3.5rem;text-align:center}
+
+/* Edit mode */
+.edit-btn{padding:.38rem .95rem;background:rgba(133,204,202,.15);border:1.5px solid var(--brand);color:var(--bd);border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:inherit}
+.edit-btn:hover{background:rgba(133,204,202,.28)}
+.edit-btn.on{background:var(--brand);color:#fff}
+.save-btn{padding:.38rem .95rem;background:var(--bdd);border:none;color:#fff;border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;display:none}
+.save-btn:hover{background:var(--bd)}
+[contenteditable="true"]{outline:1.5px dashed var(--brand) !important;border-radius:3px;min-height:1em}
+</style>
+</head>
+<body>
+<div id="pw-gate" style="position:fixed;inset:0;background:#1a5e5c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;z-index:9999">
+  <p style="color:#e0f5f5;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;letter-spacing:.06em">保険基礎知識研修</p>
+  <p style="color:#85ccca;font-size:clamp(.82rem,1.4vw,.98rem)">パスワードを入力してください</p>
+  <div style="display:flex;gap:.6rem">
+    <input id="pw-input" type="password" placeholder="password" style="padding:.65rem 1rem;border-radius:8px;border:none;font-size:1rem;outline:none;width:220px;font-family:inherit">
+    <button onclick="checkPw()" style="padding:.65rem 1.3rem;background:#85ccca;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;color:#1a5e5c;font-family:inherit">入室</button>
+  </div>
+  <p id="pw-err" style="color:#fca5a5;font-size:.85rem;min-height:1em"></p>
+</div>
+<script>
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
+if(sessionStorage.getItem('kisochisiki-auth')==='ok')document.getElementById('pw-gate').style.display='none';
+function checkPw(){
+  if(document.getElementById('pw-input').value==='kisochisiki'){
+    sessionStorage.setItem('kisochisiki-auth','ok');
+    document.getElementById('pw-gate').style.display='none';
+  } else {
+    document.getElementById('pw-err').textContent='パスワードが違います';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+</script>
+
+<div class="deck">
+
+<div class="slide s-title active">
+  <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-title" alt="Unicara">
+  <span class="badge">保険基礎知識研修 ｜ 第4回 / 全4回（最終回）</span>
+  <h1>第4回<br>ライフステージ別・クロスセル概要・総合まとめ</h1>
+  <p class="meta">RS新入社員研修</p>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>今日のゴール</h2>
+  <div class="body">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>ライフステージ別に必要な商品の組み合わせを説明できる</p></div>
+      <div class="goal"><div class="gn">2</div><p>クロスセル商材の概要を把握する</p></div>
+      <div class="goal"><div class="gn">3</div><p>黄金ルートの全体像と4回の知識が繋がる</p></div>
+    </div>
+    <div class="box-b">📌 今日で4回の知識が一本の線になる。商品知識 → 提案の流れへ繋げよう</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">ライフステージ別</span>
+  <h2>誰に・何を・なぜ提案するか</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>ライフステージ別の考え方 ― 基本</h2>
+  <div class="body">
+    <ul>
+      <li>ライフステージ × リスクの組み合わせで優先順位が変わる</li>
+      <li>「全部入れれば良い」ではなく、限られた保険料で何を優先するかを考える</li>
+      <li>変額保険（貯蓄型）と第三分野をどう組み合わせるかがポイント</li>
+    </ul>
+    <svg viewBox="0 0 500 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin:.1rem 0 .35rem;flex-shrink:0">
+      <line x1="43" y1="27" x2="467" y2="27" stroke="#d4eeee" stroke-width="3"/>
+      <!-- Stage 1: 20代独身 -->
+      <circle cx="65" cy="27" r="22" fill="#85ccca"/>
+      <text x="65" y="23" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">20代</text>
+      <text x="65" y="35" font-size="9" fill="#fff" text-anchor="middle">独身</text>
+      <text x="65" y="59" font-size="9" fill="#2d8a87" text-anchor="middle">医療・がん</text>
+      <text x="65" y="70" font-size="8.5" fill="#2d8a87" text-anchor="middle">第三分野最優先</text>
+      <!-- Arrow 1 -->
+      <polygon points="126,22 138,27 126,32" fill="#94a3b8"/>
+      <!-- Stage 2: 30代子育て -->
+      <circle cx="195" cy="27" r="22" fill="#2d8a87"/>
+      <text x="195" y="23" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">30代</text>
+      <text x="195" y="35" font-size="9" fill="#fff" text-anchor="middle">子育て</text>
+      <text x="195" y="59" font-size="9" fill="#1a5e5c" text-anchor="middle">死亡保障＋変額</text>
+      <text x="195" y="70" font-size="8.5" fill="#1a5e5c" text-anchor="middle">保障を厚く</text>
+      <!-- Arrow 2 -->
+      <polygon points="253,22 265,27 253,32" fill="#94a3b8"/>
+      <!-- Stage 3: 40-50代 -->
+      <circle cx="320" cy="27" r="22" fill="#f59e0b"/>
+      <text x="320" y="23" font-size="9" fill="#fff" text-anchor="middle" font-weight="700">40-50代</text>
+      <text x="320" y="35" font-size="9" fill="#fff" text-anchor="middle">見直し期</text>
+      <text x="320" y="59" font-size="9" fill="#92400e" text-anchor="middle">変額（老後）</text>
+      <text x="320" y="70" font-size="8.5" fill="#92400e" text-anchor="middle">第三分野見直し</text>
+      <!-- Arrow 3 -->
+      <polygon points="378,22 390,27 378,32" fill="#94a3b8"/>
+      <!-- Stage 4: 60代以降 -->
+      <circle cx="445" cy="27" r="22" fill="#059669"/>
+      <text x="445" y="23" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">60代</text>
+      <text x="445" y="35" font-size="9" fill="#fff" text-anchor="middle">受取期</text>
+      <text x="445" y="59" font-size="9" fill="#065f46" text-anchor="middle">受取・相続</text>
+      <text x="445" y="70" font-size="8.5" fill="#065f46" text-anchor="middle">介護準備</text>
+    </svg>
+    <div class="grid g4" style="margin-top:.25rem">
+      <div class="card"><h3>20代独身</h3><p>第三分野が最優先</p></div>
+      <div class="card"><h3>30代子育て</h3><p>死亡保障＋第三分野＋変額</p></div>
+      <div class="card"><h3>40〜50代</h3><p>変額（老後）＋第三分野見直し</p></div>
+      <div class="card"><h3>60代以降</h3><p>受取フェーズ＋医療・介護</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>20代独身</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div>
+        <ul>
+          <li><strong>第三分野（医療・がん）が最優先</strong></li>
+          <li>死亡保障は扶養家族がいないため薄くてよい</li>
+          <li>保険料が安い今のうちに入るメリット（年齢が上がるほど高くなる）</li>
+          <li>資産形成の早期スタートとして変額保険の検討も</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>提案の考え方</h3>
+        <ul>
+          <li>まず医療保険・がん保険で保障の土台を作る</li>
+          <li>余剰資金があれば変額保険で老後資金の積立を開始</li>
+          <li>独身だからこそ保険料が安く始められる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>30代子育て</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div>
+        <ul>
+          <li><strong>死亡保障（収入保障）＋第三分野＋変額保険</strong></li>
+          <li>万が一の際に遺族の生活を守る死亡保障を厚くする</li>
+          <li>住宅ローン × 団体信用生命保険の関係を整理する</li>
+          <li>学資・教育費の計画的な準備（変額 or 学資保険）</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>最も保険ニーズが高い年代</h3>
+        <ul>
+          <li>扶養家族が増える → 死亡保障が必要に</li>
+          <li>住宅購入 → 団信との組み合わせを確認</li>
+          <li>子どもの教育費 → 学資・変額で準備</li>
+          <li>老後資金も意識し始める時期</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 団信（団体信用生命保険）は住宅ローン契約者が死亡・高度障害になった場合にローン残高を肩代わりする。だから「死亡保障にローン残高分は含めなくていい」という設計になる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>40〜50代 ／ 60代以降</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card">
+        <h3>40〜50代</h3>
+        <ul>
+          <li>変額保険（老後資金）＋第三分野の見直し</li>
+          <li>がん・生活習慣病リスクが高まる年代</li>
+          <li>子育てが一段落し老後資金を本格的に意識</li>
+          <li><strong>短期払い</strong>で早めに払い終える選択肢も検討</li>
+          <li>既存保険の見直しと新規加入を組み合わせる</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>60代以降</h3>
+        <ul>
+          <li>受取フェーズ・医療・介護の整備</li>
+          <li>払込を終わらせるタイミングの確認</li>
+          <li>介護リスクへの備えを意識し始める</li>
+          <li>一時払い終身で相続対策</li>
+          <li>個人年金の受取開始</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>ライフステージ別 推奨商品マップ（一覧）</h2>
+  <div class="body">
+    <div class="grid g4">
+      <div class="card">
+        <h3>20代独身</h3>
+        <ul>
+          <li>①医療保険（必須）</li>
+          <li>②がん保険（必須）</li>
+          <li>③変額保険（早期スタート推奨）</li>
+          <li>④死亡保障：薄くてよい</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>30代子育て</h3>
+        <ul>
+          <li>①収入保障保険（必須・手厚く）</li>
+          <li>②医療・がん保険</li>
+          <li>③変額保険（学資・老後資金）</li>
+          <li>④団信との関係確認</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>40〜50代</h3>
+        <ul>
+          <li>①変額保険（老後・短期払い検討）</li>
+          <li>②がん保険見直し</li>
+          <li>③就業不能保険（精神疾患リスク）</li>
+          <li>④生活習慣病特約</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>60代以降</h3>
+        <ul>
+          <li>①医療・介護の整備</li>
+          <li>②一時払い終身（相続対策）</li>
+          <li>③払込終了確認</li>
+          <li>④受取フェーズの説明</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 この表を頭に入れておくと、初回面談で「今どのステージか」を確認するだけで優先順位が見えてくる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>30代モデルケース ― 保険の組み合わせ実例</h2>
+  <div class="body">
+    <svg viewBox="0 0 460 72" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.35rem;flex-shrink:0">
+      <defs>
+        <clipPath id="bc-30">
+          <rect x="50" y="18" width="400" height="28" rx="6"/>
+        </clipPath>
+      </defs>
+      <text x="250" y="11" font-size="8" fill="#64748b" text-anchor="middle">月々の保険料内訳（合計 約3万9,000円 ≈ 手取りの約12%）</text>
+      <g clip-path="url(#bc-30)">
+        <rect x="50"  y="18" width="72"  height="28" fill="#85ccca"/>
+        <rect x="122" y="18" width="20"  height="28" fill="#94a3b8"/>
+        <rect x="142" y="18" width="308" height="28" fill="#1a5e5c"/>
+        <line x1="122" y1="18" x2="122" y2="46" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+        <line x1="142" y1="18" x2="142" y2="46" stroke="rgba(255,255,255,.55)" stroke-width="1.5"/>
+      </g>
+      <text x="86"  y="57" font-size="7.5" fill="#2d8a87" text-anchor="middle">医療保険</text>
+      <text x="86"  y="66" font-size="8" fill="#334155" text-anchor="middle" font-weight="600">¥7,000</text>
+      <text x="132" y="57" font-size="7.5" fill="#64748b" text-anchor="middle">収入保障</text>
+      <text x="132" y="66" font-size="8" fill="#334155" text-anchor="middle" font-weight="600">¥2,000</text>
+      <text x="296" y="57" font-size="8" fill="#1a5e5c" text-anchor="middle" font-weight="700">変額保険（資産形成）</text>
+      <text x="296" y="66" font-size="8" fill="#334155" text-anchor="middle" font-weight="600">¥30,000</text>
+    </svg>
+    <div class="grid g2">
+      <div class="card">
+        <h3>山田さん（33歳・会社員）プロフィール</h3>
+        <ul>
+          <li>月収42万円（手取り32万円）</li>
+          <li>妻（30歳）・子2人（5歳・2歳）</li>
+          <li>住宅ローン残高：3,200万円（<strong>団信加入済み</strong>）</li>
+          <li>既存保険：なし</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>推奨保険の組み合わせ</h3>
+        <ul>
+          <li><strong>医療保険（約7,000円）</strong>
+            <ul style="margin:.15rem 0 .15rem 1rem;font-size:.9em">
+              <li>がん診断一時金：150万円</li>
+              <li>三大疾病一時金：100万円</li>
+              <li>就労不能</li>
+            </ul>
+          </li>
+          <li><strong>収入保障保険（約2,000円）</strong>
+            <ul style="margin:.15rem 0 .15rem 1rem;font-size:.9em">
+              <li>月額15万円</li>
+            </ul>
+          </li>
+          <li><strong>変額保険（約30,000円）</strong>
+            <ul style="margin:.15rem 0 .15rem 1rem;font-size:.9em">
+              <li>三大疾病払込免除特約</li>
+            </ul>
+          </li>
+          <li>→ 合計：月約<strong>3万9,000円</strong>（手取りの約12%）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 住宅ローンは団信で死亡時に相殺されるため、死亡保障ニーズは遺族の生活費中心。収入保障で毎月補う設計が合理的</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">クロスセル概要</span>
+  <h2>損害保険・クロスセル商材</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>損害保険の概要</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card">
+        <h3>火災保険</h3>
+        <ul>
+          <li>自宅・家財の損害をカバー</li>
+          <li>住宅ローン時はほぼ必須</li>
+          <li>地震保険は火災保険とセットでしか入れない</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>自動車保険</h3>
+        <ul>
+          <li>自賠責（強制）：人への補償のみ・上限あり</li>
+          <li>任意保険：対人・対物・車両保険</li>
+          <li>自賠責だけでは全く足りない</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>傷害保険</h3>
+        <ul>
+          <li>日常のケガ全般をカバー</li>
+          <li>医療保険との違い：傷害保険はケガのみ</li>
+          <li>スポーツ・レジャー中のケガ等</li>
+        </ul>
+      </div>
+    </div>
+    <p style="font-size:clamp(.78rem,1.2vw,.9rem);color:var(--muted);margin-top:.25rem">※ 詳細は別途研修</p>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>損害保険 ― 種類と押さえるべきポイント</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card">
+        <h3>火災保険</h3>
+        <ul>
+          <li>対象：建物・家財の損害をカバー</li>
+          <li>住宅ローン契約時はほぼ必須（金融機関が要求）</li>
+          <li><strong>地震保険は火災保険とセットでしか加入できない</strong></li>
+          <li>水害・風災の補償範囲は商品によって異なる</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>自動車保険</h3>
+        <ul>
+          <li>自賠責（強制）：対人賠償のみ・上限あり</li>
+          <li>任意保険：対人・対物・車両・搭乗者傷害等</li>
+          <li>等級制度（ノーカウント事故・ノンフリート等級）</li>
+          <li>年齢・等級で保険料が大きく変わる</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>傷害保険</h3>
+        <ul>
+          <li>日常のケガ全般をカバー（病気は対象外）</li>
+          <li>海外旅行傷害保険：クレジットカード付帯と単体の違いを確認</li>
+          <li>スポーツ・交通事故等のケガに迅速対応</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 生命保険の面談で「火災保険・自動車保険は今どこで入ってますか？」と聞くことがクロスセルの入口になる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>その他クロスセル商材</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card">
+        <h3>不動産</h3>
+        <ul>
+          <li>投資用・賃貸形成の文脈で登場</li>
+          <li>属性確認必須（年収・勤務先等）</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>太陽光</h3>
+        <ul>
+          <li>再生可能エネルギー投資</li>
+          <li>長期安定収入を求める層に訴求</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>住宅</h3>
+        <ul>
+          <li>購入・住み替えの相談から展開</li>
+          <li>火災保険・団信とセットで提案</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>賃貸</h3>
+        <ul>
+          <li>引越し・部屋探しニーズに対応</li>
+          <li>火災保険・家財保険とセットで紹介</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>転職</h3>
+        <ul>
+          <li>キャリア相談から信頼関係を構築</li>
+          <li>収入変動に合わせた保障見直しへ</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>ライフライン</h3>
+        <ul>
+          <li>電気・ガス等の切り替え提案</li>
+          <li>生活コスト削減で保険料余力を創出</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 クロスセルの考え方：保険を入口に、お客様の生活全体をサポートする視点。6回目に登場する商材：不動産・太陽光・住宅・賃貸・転職・ライフライン</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">総合まとめ</span>
+  <h2>黄金ルートと4回の知識を繋げる</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>黄金ルート 2フロントの全体像</h2>
+  <div class="body">
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <div>
+        <p style="font-size:clamp(.78rem,1.2vw,.9rem);color:var(--muted);margin-bottom:.5rem;font-weight:600">資産形成フロント（全6回）</p>
+        <div class="flow">
+          <div class="flow-item">① ライフプランニング</div><span class="flow-arrow">→</span>
+          <div class="flow-item" style="background:var(--bd)">② 変額保険提案</div><span class="flow-arrow">→</span>
+          <div class="flow-item" style="background:var(--bd)">③ 変額保険回収</div><span class="flow-arrow">→</span>
+          <div class="flow-item">④ 第三分野提案</div><span class="flow-arrow">→</span>
+          <div class="flow-item">⑤ 第三分野回収</div><span class="flow-arrow">→</span>
+          <div class="flow-item">⑥ クロスセル</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:clamp(.78rem,1.2vw,.9rem);color:var(--muted);margin-bottom:.5rem;font-weight:600">第三分野フロント（全6回）</p>
+        <div class="flow">
+          <div class="flow-item">① 第三分野提案</div><span class="flow-arrow">→</span>
+          <div class="flow-item">② 回収＋移行</div><span class="flow-arrow">→</span>
+          <div class="flow-item" style="background:var(--bd)">③ LP＋変額提案</div><span class="flow-arrow">→</span>
+          <div class="flow-item" style="background:var(--bd)">④ 変額回収</div><span class="flow-arrow">→</span>
+          <div class="flow-item">⑤ 死亡保障</div><span class="flow-arrow">→</span>
+          <div class="flow-item">⑥ クロスセル</div>
+        </div>
+      </div>
+    </div>
+    <div class="box-a">💡 どちらのフロントでも変額保険と第三分野が核心。今回学んだ知識がここで使われる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>黄金ルート ― 2フロントの実践フロー</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card ac">
+        <h3>資産形成フロント</h3>
+        <ul>
+          <li>① 変額保険で老後資金の話から入る</li>
+          <li>② 運用の話の流れで第三分野（万一のリスク）へ</li>
+          <li>③ 医療・がん・就業不能の保障設計</li>
+          <li>④ クロスセル（不動産・太陽光・住宅・賃貸・転職・ライフライン）</li>
+          <li style="margin-top:.3rem;font-size:.9em;color:var(--muted)">刺さる層：20〜40代・将来のお金が気になる人</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>第三分野フロント</h3>
+        <ul>
+          <li>① 医療・がん保険の必要性から入る</li>
+          <li>② 「万一のとき家族はどうなるか」で死亡保障へ</li>
+          <li>③ 収入保障・定期保険の提案</li>
+          <li>④ 老後資金として変額保険へ</li>
+          <li>⑤ クロスセル</li>
+          <li style="font-size:.9em;color:var(--muted)">刺さる層：病気・ケガが心配な人・主婦層</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 どちらのフロントから入っても最終的に同じ商品群に辿り着く。顧客の最初の関心事に合わせてフロントを選ぶことが大切</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>4回通じての3つの核心</h2>
+  <div class="body">
+    <div style="display:flex;flex-direction:column;gap:.65rem">
+      <div class="key-item"><div class="key-num">1</div><p>公的保障のギャップを埋めるのが保険の役割 ← お客様への説明の出発点</p></div>
+      <div class="key-item"><div class="key-num">2</div><p>変額保険と第三分野が当社の2軸 ← 両フロントに必ず登場する</p></div>
+      <div class="key-item"><div class="key-num">3</div><p>商品の構造（定期・終身・養老）を理解すれば、どんな商品でも読み解ける</p></div>
+    </div>
+    <div class="box-g">✅ この3つが腹落ちしていれば、コンプラ研修・ロールプレイ研修に進む準備ができている</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>全4回 総まとめ ― これだけは覚えておく3つの核心</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card ac">
+        <h3>核心① 公的保障のギャップが出発点</h3>
+        <p>高額療養費の対象外費用・老後2,000万問題・傷病手当金終了後の収入ゼロ。このギャップを埋めるのが保険の存在意義。ここがお客様への説明の核心</p>
+      </div>
+      <div class="card am">
+        <h3>核心② 当社の2軸を軸に組み立てる</h3>
+        <p>変額保険（資産形成）＋第三分野（生きているリスク）。この2つがあれば基本の保障設計はできる。両フロントのどちらからでも必ず登場する</p>
+      </div>
+      <div class="card gr">
+        <h3>核心③ 構造を理解すれば応用できる</h3>
+        <p>定期・終身・養老の3形態＋特約の概念を理解すれば、どんな商品パンフを読んでも構造が分かる。新商品が出ても迷わず読み解ける</p>
+      </div>
+    </div>
+    <div class="box-b">📌 次のステップ：① コンプライアンス研修 ② ロールプレイ研修</div>
+  </div>
+</div>
+
+<div class="slide s-final">
+  <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-title" alt="Unicara">
+  <h2>研修お疲れ様でした</h2>
+  <p>次のステップに向けて</p>
+  <div class="steps">
+    <div class="step"><div class="step-dot"></div><p>コンプライアンス研修（法令・行動規範を学ぶ）</p></div>
+    <div class="step"><div class="step-dot"></div><p>ロールプレイ研修（今日の知識を商談の場で使う）</p></div>
+  </div>
+</div>
+
+<div class="slide s-qa">
+  <h2>Q &amp; A</h2>
+  <p>4回通じた質問・確認事項を自由に聞いてください</p>
+</div>
+
+</div>
+<nav class="nav">
+  <button class="btn" id="prev" disabled>‹</button>
+  <span class="cnt" id="c"></span>
+  <button class="btn" id="next">›</button>
+  <button class="edit-btn" id="editBtn">編集</button>
+  <button class="save-btn" id="saveBtn">HTMLを保存</button>
+</nav>
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0,total=slides.length;
+function go(n){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(n,total-1));slides[cur].classList.add('active');document.getElementById('c').textContent=`${cur+1} / ${total}`;document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===total-1;}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+go(0);
+
+let editMode=false;
+const editBtn=document.getElementById('editBtn');
+const saveBtn=document.getElementById('saveBtn');
+const SELS='h1,h2,h3,p,.badge,.ch,.box-a,.box-b,.box-g';
+
+function toggleEdit(){
+  editMode=!editMode;
+  document.querySelectorAll(SELS).forEach(el=>{el.contentEditable=editMode?'true':'false';});
+  editBtn.textContent=editMode?'編集終了':'編集';
+  editBtn.classList.toggle('on',editMode);
+  saveBtn.style.display=editMode?'inline-block':'none';
+}
+
+function saveHTML(){
+  document.querySelectorAll(SELS).forEach(el=>el.removeAttribute('contenteditable'));
+  editMode=false;
+  editBtn.textContent='編集';
+  editBtn.classList.remove('on');
+  saveBtn.style.display='none';
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=document.title+'.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+editBtn.onclick=toggleEdit;
+saveBtn.onclick=saveHTML;
+</script>
+</body>
+</html>

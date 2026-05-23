@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第1回 | 保険基礎知識研修</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#85ccca;--bd:#2d8a87;--bdd:#1a5e5c;--bl:#e0f5f5;--bll:#f0fafa;
+  --amber:#f59e0b;--al:#fef3c7;
+  --green:#059669;--gl:#d1fae5;
+  --text:#0f172a;--text-2:#334155;--muted:#64748b;
+  --bg:#fff;--surface:#f8fafa;--border:#d4eeee;
+}
+body{font-family:system-ui,-apple-system,'Hiragino Sans','Yu Gothic UI',sans-serif;background:#daeeed;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+.deck{width:min(1100px,94vw);aspect-ratio:16/9;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:14px;border:2.5px solid var(--brand);overflow:hidden}
+.slide{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:all}
+.bar{height:4px;background:var(--brand);flex-shrink:0}
+strong{font-weight:700}
+
+/* Logo */
+.logo-title{height:clamp(50px,7vw,80px);opacity:.85}
+.logo-mk{position:absolute;top:.35rem;right:.7rem;height:clamp(14px,1.8vw,20px);opacity:.45}
+
+/* Title */
+.s-title{background:#fff;justify-content:center;align-items:center;gap:.85rem;text-align:center;padding:2.5rem 3rem}
+.badge{background:var(--bll);color:var(--bd);padding:.35rem 1.2rem;border-radius:99px;font-size:clamp(.78rem,1.2vw,.92rem);letter-spacing:.04em;border:1.5px solid var(--brand);font-weight:500}
+.s-title h1{color:var(--text);font-size:clamp(1.6rem,3.5vw,2.7rem);font-weight:700;line-height:1.3}
+.s-title .meta{color:var(--muted);font-size:clamp(.82rem,1.3vw,.98rem)}
+
+/* Section */
+.s-section{background:var(--bl);justify-content:flex-end;padding:2.5rem 3rem;gap:.55rem;border-left:6px solid var(--brand)}
+.s-section .ch{color:var(--bd);font-size:clamp(.72rem,1.1vw,.88rem);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.s-section h2{color:var(--bdd);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.3}
+
+/* Content */
+.s-content{padding:1.4rem 2.4rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:.75rem}
+.s-content>h2{color:var(--bdd);font-size:clamp(1.05rem,1.9vw,1.45rem);font-weight:700;padding-bottom:.55rem;border-bottom:2.5px solid var(--brand);flex-shrink:0}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.6rem}
+
+ul{list-style:none;display:flex;flex-direction:column;gap:.48rem}
+li{display:flex;align-items:flex-start;gap:.55rem;font-size:clamp(.9rem,1.45vw,1.1rem);line-height:1.6;color:var(--text)}
+li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin-top:.24em}
+.sub li::before{content:'–';color:var(--muted)}
+.sub{padding-left:1.2rem}
+
+.grid{display:grid;gap:.75rem}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.card h3{font-size:clamp(.88rem,1.38vw,1.08rem);font-weight:700;color:var(--bdd);margin-bottom:.38rem}
+.card p,.card li{font-size:clamp(.8rem,1.22vw,.94rem);color:var(--text-2);line-height:1.52}
+.card.ac{border-color:var(--brand);background:var(--bll)}
+.card.ac h3{color:var(--bd)}
+.card.am{border-color:var(--amber);background:var(--al)}
+.card.am h3{color:#92400e}
+.card.gr{border-color:var(--green);background:var(--gl)}
+.card.gr h3{color:var(--green)}
+
+.box-a{background:var(--al);border-left:4px solid var(--amber);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-b{background:var(--bll);border-left:4px solid var(--brand);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-g{background:var(--gl);border-left:4px solid var(--green);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+
+.goal-list{display:flex;flex-direction:column;gap:.6rem}
+.goal{display:flex;align-items:center;gap:.85rem;background:var(--bll);padding:.8rem 1.1rem;border-radius:10px;border:1.5px solid var(--border)}
+.gn{min-width:1.8rem;height:1.8rem;background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+.goal p{font-size:clamp(.9rem,1.45vw,1.1rem);color:var(--text);line-height:1.5}
+
+/* QA */
+.s-qa{background:var(--bl);justify-content:center;align-items:center;gap:1rem;text-align:center;border-left:6px solid var(--brand)}
+.s-qa h2{color:var(--bdd);font-size:clamp(2rem,4vw,3.2rem);font-weight:700}
+.s-qa p{color:var(--bd);font-size:clamp(.9rem,1.45vw,1.1rem)}
+
+/* Nav */
+.nav{display:flex;align-items:center;gap:1rem}
+.btn{width:2.4rem;height:2.4rem;background:rgba(133,204,202,.15);border:1.5px solid rgba(133,204,202,.5);color:var(--bd);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.btn:hover{background:rgba(133,204,202,.3)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.cnt{color:var(--bd);font-size:.82rem;min-width:3.5rem;text-align:center}
+
+/* Edit mode */
+.edit-btn{padding:.38rem .95rem;background:rgba(133,204,202,.15);border:1.5px solid var(--brand);color:var(--bd);border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:inherit}
+.edit-btn:hover{background:rgba(133,204,202,.28)}
+.edit-btn.on{background:var(--brand);color:#fff}
+.save-btn{padding:.38rem .95rem;background:var(--bdd);border:none;color:#fff;border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;display:none}
+.save-btn:hover{background:var(--bd)}
+[contenteditable="true"]{outline:1.5px dashed var(--brand) !important;border-radius:3px;min-height:1em}
+</style>
+</head>
+<body>
+<div id="pw-gate" style="position:fixed;inset:0;background:#1a5e5c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;z-index:9999">
+  <p style="color:#e0f5f5;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;letter-spacing:.06em">保険基礎知識研修</p>
+  <p style="color:#85ccca;font-size:clamp(.82rem,1.4vw,.98rem)">パスワードを入力してください</p>
+  <div style="display:flex;gap:.6rem">
+    <input id="pw-input" type="password" placeholder="password" style="padding:.65rem 1rem;border-radius:8px;border:none;font-size:1rem;outline:none;width:220px;font-family:inherit">
+    <button onclick="checkPw()" style="padding:.65rem 1.3rem;background:#85ccca;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;color:#1a5e5c;font-family:inherit">入室</button>
+  </div>
+  <p id="pw-err" style="color:#fca5a5;font-size:.85rem;min-height:1em"></p>
+</div>
+<script>
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
+if(sessionStorage.getItem('kisochisiki-auth')==='ok')document.getElementById('pw-gate').style.display='none';
+function checkPw(){
+  if(document.getElementById('pw-input').value==='kisochisiki'){
+    sessionStorage.setItem('kisochisiki-auth','ok');
+    document.getElementById('pw-gate').style.display='none';
+  } else {
+    document.getElementById('pw-err').textContent='パスワードが違います';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+</script>
+
+<div class="deck">
+
+<div class="slide s-title active">
+  <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-title" alt="Unicara">
+  <span class="badge">保険基礎知識研修 ｜ 全4回</span>
+  <h1>第1回<br>保険の基礎・社会保障・専門用語</h1>
+  <p class="meta">RS新入社員研修</p>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>今日のゴール</h2>
+  <div class="body" style="justify-content:flex-start">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>保険の仕組みを自分の言葉で説明できる</p></div>
+      <div class="goal"><div class="gn">2</div><p>よく使う専門用語を正確に使える</p></div>
+      <div class="goal"><div class="gn">3</div><p>公的保障のどこに穴があるかをお客様に説明できる</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">第1章</span>
+  <h2>保険とは何か</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>保険の本質 ― リスクへの3つの対処</h2>
+  <div class="body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;flex:1;align-items:stretch">
+      <div style="display:flex;flex-direction:column;gap:.65rem;justify-content:center">
+        <div class="grid g3">
+          <div class="card"><h3>① 回避</h3><p>リスク自体を避ける（例：車に乗らない）</p></div>
+          <div class="card"><h3>② 自己保有</h3><p>自分でお金を用意して備える（例：貯蓄）</p></div>
+          <div class="card ac"><h3>③ 移転（保険）</h3><p>保険会社にリスクを渡す＝相互扶助</p></div>
+        </div>
+        <div class="box-a">💡 保険＝「多くの人から少しずつ集め、困った人に届ける」相互扶助の仕組み</div>
+      </div>
+      <div style="background:var(--bll);border-radius:12px;border:1.5px solid var(--border);padding:.65rem .8rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem">
+        <p style="font-size:.78rem;font-weight:700;color:var(--bd);letter-spacing:.06em">大数の法則</p>
+        <svg viewBox="0 0 200 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:260px;height:auto;display:block">
+          <defs>
+            <marker id="arh" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <polygon points="0,0 6,3 0,6" fill="#2d8a87"/>
+            </marker>
+            <marker id="arha" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <polygon points="0,0 6,3 0,6" fill="#f59e0b"/>
+            </marker>
+          </defs>
+          <!-- 5 person icons top row -->
+          <circle cx="18" cy="16" r="9" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+          <text x="18" y="21" text-anchor="middle" font-size="12" fill="#1a5e5c" font-weight="700">人</text>
+          <text x="18" y="34" text-anchor="middle" font-size="8" fill="#64748b">月数千円</text>
+          <circle cx="57" cy="16" r="9" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+          <text x="57" y="21" text-anchor="middle" font-size="12" fill="#1a5e5c" font-weight="700">人</text>
+          <text x="57" y="34" text-anchor="middle" font-size="8" fill="#64748b">月数千円</text>
+          <circle cx="100" cy="16" r="9" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+          <text x="100" y="21" text-anchor="middle" font-size="12" fill="#1a5e5c" font-weight="700">人</text>
+          <text x="100" y="34" text-anchor="middle" font-size="8" fill="#64748b">月数千円</text>
+          <circle cx="143" cy="16" r="9" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+          <text x="143" y="21" text-anchor="middle" font-size="12" fill="#1a5e5c" font-weight="700">人</text>
+          <text x="143" y="34" text-anchor="middle" font-size="8" fill="#64748b">月数千円</text>
+          <circle cx="182" cy="16" r="9" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+          <text x="182" y="21" text-anchor="middle" font-size="12" fill="#1a5e5c" font-weight="700">人</text>
+          <text x="182" y="34" text-anchor="middle" font-size="8" fill="#64748b">月数千円</text>
+          <!-- Converging arrows to pool -->
+          <line x1="18" y1="38" x2="72" y2="74" stroke="#85ccca" stroke-width="1.2" marker-end="url(#arh)"/>
+          <line x1="57" y1="38" x2="82" y2="74" stroke="#85ccca" stroke-width="1.2" marker-end="url(#arh)"/>
+          <line x1="100" y1="38" x2="100" y2="74" stroke="#85ccca" stroke-width="1.5" marker-end="url(#arh)"/>
+          <line x1="143" y1="38" x2="118" y2="74" stroke="#85ccca" stroke-width="1.2" marker-end="url(#arh)"/>
+          <line x1="182" y1="38" x2="128" y2="74" stroke="#85ccca" stroke-width="1.2" marker-end="url(#arh)"/>
+          <!-- Pool -->
+          <rect x="38" y="76" width="124" height="38" rx="10" fill="#e0f5f5" stroke="#2d8a87" stroke-width="2"/>
+          <text x="100" y="93" text-anchor="middle" font-size="11" font-weight="700" fill="#1a5e5c">保険料プール</text>
+          <text x="100" y="107" text-anchor="middle" font-size="7.5" fill="#2d8a87">支払い額を統計的に安定予測</text>
+          <!-- Arrow down from pool -->
+          <line x1="100" y1="116" x2="100" y2="140" stroke="#f59e0b" stroke-width="2.5" marker-end="url(#arha)"/>
+          <text x="110" y="133" font-size="8.5" fill="#92400e" font-weight="600">万一の場合</text>
+          <!-- Highlighted recipient -->
+          <circle cx="100" cy="156" r="13" fill="#fef3c7" stroke="#f59e0b" stroke-width="2.5"/>
+          <text x="100" y="161" text-anchor="middle" font-size="12" fill="#92400e" font-weight="700">人</text>
+          <!-- Amount label -->
+          <rect x="36" y="174" width="128" height="16" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+          <text x="100" y="185" text-anchor="middle" font-size="9.5" font-weight="700" fill="#92400e">数千万円を受け取る</text>
+        </svg>
+        <p style="font-size:.68rem;color:var(--muted);text-align:center;line-height:1.5">多くの人がリスクをシェアすることで<br>月数千円で数千万円の保障が可能に</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>保険の全体マップ ― 3分野</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card"><h3>第一分野</h3><ul><li>死亡・高度障害のリスク</li><li>「人」が対象</li><li>定期・終身・養老など</li></ul></div>
+      <div class="card"><h3>第二分野</h3><ul><li>モノや賠償のリスク</li><li>火災・自動車など</li><li>実損払いが基本</li></ul></div>
+      <div class="card ac"><h3>第三分野 ★当社の2軸の1つ</h3><ul><li>「生きている間のリスク」</li><li>医療・がん・就業不能</li><li>どちらにも属さない</li></ul></div>
+    </div>
+    <div class="box-b">📌 当社の主力は「変額保険（生命保険）」と「医療・がん・就業不能（第三分野）」の2軸。損害保険はクロスセル商材として第4回で扱う</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">第2章</span>
+  <h2>公的保障と私的保険</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>日本の社会保障制度の全体像</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card"><h3>公的医療保険</h3><ul><li>健康保険（会社員）・国民健康保険（自営業等）</li><li>3割負担が基本</li></ul></div>
+      <div class="card"><h3>公的年金</h3><ul><li>国民年金（全員加入）</li><li>厚生年金（会社員加算）</li></ul></div>
+      <div class="card"><h3>雇用保険・労災保険</h3><ul><li>失業給付・育児休業給付</li><li>業務上の傷病・死亡</li></ul></div>
+      <div class="card"><h3>介護保険</h3><ul><li>40歳から加入</li><li>要介護認定で給付開始</li></ul></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>高額療養費制度 ― 上限があっても全額はカバーされない</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card ac">
+        <h3>制度の概要</h3>
+        <ul>
+          <li>1ヶ月の医療費が上限を超えた部分を公費が負担</li>
+          <li>上限は所得によって異なる（標準報酬月額28〜50万円の人で月約<strong>8〜9万円</strong>）</li>
+          <li>同じ月・同じ医療機関ごとに計算される点に注意</li>
+          <li>高額療養費の申請手続きが必要なケースもある</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>制度の対象外となる費用</h3>
+        <ul>
+          <li>差額ベッド代（個室・2人部屋等）</li>
+          <li>先進医療の技術料（公的保険が使えない治療）</li>
+          <li>食事代（1食約460円・3食×入院日数分）</li>
+          <li>通院交通費・日用品・付き添い費用</li>
+          <li>患者申出療養・自由診療</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-a">💡 「手術で100万かかっても自己負担は9万」は正確ではない。対象外費用が積み上がると実際の負担はもっと大きくなる。だから医療保険が必要</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>公的保障だけでは足りない理由</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card"><h3>医療費</h3><ul><li>高額療養費の上限は月8〜9万円程度</li><li>差額ベッド代・先進医療はカバー外</li><li>通院交通費・食事代も自己負担</li></ul></div>
+      <div class="card"><h3>老後資金</h3><ul><li>年金平均受取額：月14〜22万円</li><li>老後2,000万円問題</li><li>長生きするほど不足が拡大</li></ul></div>
+      <div class="card"><h3>就業不能</h3><ul><li>傷病手当金：最長1年6ヶ月・給与の2/3</li><li><strong>1年6ヶ月以降の収入はゼロ</strong></li><li>障害年金の条件は厳しい</li></ul></div>
+    </div>
+    <svg viewBox="0 0 540 82" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin:.1rem 0">
+      <!-- Row 1: 医療費 -->
+      <text x="6" y="13" font-size="10.5" fill="#334155" font-weight="700" dominant-baseline="middle">医療費</text>
+      <rect x="78" y="4" width="270" height="18" rx="5" fill="#e0f5f5"/>
+      <rect x="78" y="4" width="162" height="18" rx="5" fill="#85ccca"/>
+      <text x="82" y="13" font-size="7.5" fill="white" font-weight="600" dominant-baseline="middle">高額療養費制度でカバー</text>
+      <text x="244" y="13" font-size="7.5" fill="#92400e" font-weight="600" dominant-baseline="middle">対象外費用</text>
+      <!-- Row 2: 老後資金 -->
+      <text x="6" y="41" font-size="10.5" fill="#334155" font-weight="700" dominant-baseline="middle">老後資金</text>
+      <rect x="78" y="32" width="270" height="18" rx="5" fill="#e0f5f5"/>
+      <rect x="78" y="32" width="110" height="18" rx="5" fill="#85ccca"/>
+      <text x="82" y="41" font-size="7.5" fill="white" font-weight="600" dominant-baseline="middle">公的年金</text>
+      <text x="192" y="41" font-size="7.5" fill="#92400e" font-weight="600" dominant-baseline="middle">老後2,000万・長生きリスク</text>
+      <!-- Row 3: 就業不能 -->
+      <text x="6" y="69" font-size="10.5" fill="#334155" font-weight="700" dominant-baseline="middle">就業不能</text>
+      <rect x="78" y="60" width="270" height="18" rx="5" fill="#e0f5f5"/>
+      <rect x="78" y="60" width="67" height="18" rx="5" fill="#85ccca"/>
+      <text x="82" y="69" font-size="7.5" fill="white" font-weight="600" dominant-baseline="middle">傷病手当1.5年</text>
+      <text x="149" y="69" font-size="7.5" fill="#92400e" font-weight="600" dominant-baseline="middle">1.5年以降→収入ほぼゼロ</text>
+      <!-- Legend (safely within 540px viewBox) -->
+      <rect x="468" y="3" width="10" height="10" rx="2" fill="#85ccca"/>
+      <text x="481" y="8" font-size="7.5" fill="#64748b" dominant-baseline="middle">公的保障</text>
+      <rect x="468" y="18" width="10" height="10" rx="2" fill="#e0f5f5" stroke="#85ccca" stroke-width="1"/>
+      <text x="481" y="23" font-size="7.5" fill="#64748b" dominant-baseline="middle">ギャップ</text>
+    </svg>
+    <div class="box-a">💡 公的保障の「ギャップ」を埋めるのが私的保険の役割 ← お客様説明の核心</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>就業不能時 ― 時間軸で見た収入の変化</h2>
+  <div class="body">
+    <svg viewBox="0 0 420 115" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block">
+      <defs>
+        <marker id="arr-inc" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <polygon points="0,0 6,3 0,6" fill="#94a3b8"/>
+        </marker>
+      </defs>
+      <!-- Y axis -->
+      <line x1="46" y1="8" x2="46" y2="92" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arr-inc)"/>
+      <text x="42" y="22" font-size="8" fill="#64748b" text-anchor="end" dominant-baseline="middle">100%</text>
+      <text x="42" y="52" font-size="8" fill="#64748b" text-anchor="end" dominant-baseline="middle">67%</text>
+      <text x="42" y="82" font-size="8" fill="#64748b" text-anchor="end" dominant-baseline="middle">~15%</text>
+      <text x="12" y="52" font-size="8" fill="#64748b" text-anchor="middle" dominant-baseline="middle" transform="rotate(-90,12,52)">収入</text>
+      <!-- X axis -->
+      <line x1="46" y1="88" x2="416" y2="88" stroke="#cbd5e1" stroke-width="1.5" marker-end="url(#arr-inc)"/>
+      <!-- Phase 1: 0-3日 → 有給 (x46-86) full income -->
+      <rect x="46" y="18" width="40" height="70" fill="#85ccca" opacity=".85"/>
+      <text x="66" y="100" font-size="7.5" fill="#334155" text-anchor="middle">0〜3日</text>
+      <text x="66" y="108" font-size="7" fill="#64748b" text-anchor="middle">有給消化</text>
+      <text x="66" y="13" font-size="7.5" fill="#2d8a87" font-weight="700" text-anchor="middle">給与全額</text>
+      <!-- Phase 2: 4日-18ヶ月 → 傷病手当 (x86-230) 2/3 -->
+      <rect x="86" y="48" width="144" height="40" fill="#85ccca" opacity=".55"/>
+      <text x="158" y="100" font-size="7.5" fill="#334155" text-anchor="middle">4日目〜1年6ヶ月</text>
+      <text x="158" y="108" font-size="7" fill="#64748b" text-anchor="middle">傷病手当金（給与の2/3）</text>
+      <text x="158" y="43" font-size="7.5" fill="#2d8a87" font-weight="700" text-anchor="middle">給与の約2/3</text>
+      <!-- Drop line -->
+      <line x1="230" y1="48" x2="230" y2="88" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="230" y="40" font-size="8" fill="#f59e0b" font-weight="700" text-anchor="middle">終了</text>
+      <!-- Phase 3: 1年6ヶ月以降 → ほぼゼロ (x230-410) -->
+      <rect x="230" y="79" width="178" height="9" fill="#fbbf24" opacity=".8"/>
+      <text x="318" y="100" font-size="7.5" fill="#334155" text-anchor="middle">1年6ヶ月以降</text>
+      <text x="318" y="108" font-size="7" fill="#92400e" font-weight="700" text-anchor="middle">⚠️ 障害年金のみ</text>
+      <text x="318" y="74" font-size="7.5" fill="#92400e" font-weight="700" text-anchor="middle">収入がほぼゼロに</text>
+    </svg>
+    <div class="grid g3" style="gap:.45rem">
+      <div class="card" style="padding:.6rem .8rem"><h3>0〜3日目</h3><p>有給休暇を消化。給与はほぼ全額受け取れる</p></div>
+      <div class="card am" style="padding:.6rem .8rem"><h3>4日目〜1年6ヶ月</h3><p><strong>傷病手当金</strong>が支給される。給与の約2/3。最長18ヶ月が上限</p></div>
+      <div class="card" style="border-color:var(--amber);background:#fff7ed;padding:.6rem .8rem"><h3 style="color:#9a3412">1年6ヶ月以降 ⚠️</h3><p style="color:#7c2d12">傷病手当金ゼロ。障害年金は条件が厳しく<strong>収入が大幅に消える</strong></p></div>
+    </div>
+    <div class="box-a">💡 月収30万円の人が1年6ヶ月後に受け取れる障害年金は月5〜8万円（1・2級）。生活費の不足を補うのが就業不能保険</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">専門用語</span>
+  <h2>保険で使う言葉を正確に覚える</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>専門用語① 基本3用語</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card"><h3>保険料</h3><p>お客様が支払うお金<br>月払・年払・一時払いなど</p></div>
+      <div class="card"><h3>保険金</h3><p>死亡・高度障害時に支払われるお金<br>まとまった金額（一時金）</p></div>
+      <div class="card"><h3>給付金</h3><p>入院・手術など保険金以外で支払われるお金<br>第三分野で多く使われる</p></div>
+    </div>
+    <p style="font-size:clamp(.72rem,1.1vw,.84rem);font-weight:700;color:var(--muted);letter-spacing:.05em">業界略語</p>
+    <div class="grid g4">
+      <div class="card" style="padding:.6rem .8rem">
+        <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:800;color:var(--bd);font-family:monospace;margin-bottom:.25rem">P</p>
+        <p style="font-size:clamp(.72rem,1.05vw,.82rem)">保険料（Premium）</p>
+      </div>
+      <div class="card" style="padding:.6rem .8rem">
+        <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:800;color:var(--bd);font-family:monospace;margin-bottom:.25rem">S</p>
+        <p style="font-size:clamp(.72rem,1.05vw,.82rem)">保険金額（Sum Assured）</p>
+      </div>
+      <div class="card" style="padding:.6rem .8rem">
+        <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:800;color:var(--bd);font-family:monospace;margin-bottom:.25rem">CV / SV</p>
+        <p style="font-size:clamp(.72rem,1.05vw,.82rem)">解約返戻金（Cash Value）</p>
+      </div>
+      <div class="card" style="padding:.6rem .8rem">
+        <p style="font-size:clamp(1rem,1.8vw,1.4rem);font-weight:800;color:var(--bd);font-family:monospace;margin-bottom:.25rem">ANP</p>
+        <p style="font-size:clamp(.72rem,1.05vw,.82rem)">年換算保険料</p>
+      </div>
+    </div>
+    <div class="box-b">📌 「保険金」と「給付金」は混同しやすい。死亡時→保険金、入院時→給付金と押さえる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>専門用語② 登場人物の整理</h2>
+  <div class="body">
+    <svg viewBox="0 0 420 66" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.4rem;flex-shrink:0">
+      <defs>
+        <marker id="arr-p" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <polygon points="0,0 6,3 0,6" fill="#85ccca"/>
+        </marker>
+        <marker id="arr-pm" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <polygon points="0,0 6,3 0,6" fill="#f59e0b"/>
+        </marker>
+        <marker id="arr-pd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <polygon points="0,0 6,3 0,6" fill="#94a3b8"/>
+        </marker>
+      </defs>
+      <!-- 契約者 -->
+      <rect x="5" y="12" width="80" height="26" rx="6" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+      <text x="45" y="28" font-size="10" fill="#2d8a87" text-anchor="middle" font-weight="700">契約者</text>
+      <!-- 保険料 arrow -->
+      <line x1="85" y1="25" x2="148" y2="25" stroke="#85ccca" stroke-width="1.5" marker-end="url(#arr-p)"/>
+      <text x="117" y="20" font-size="7.5" fill="#2d8a87" text-anchor="middle">保険料を払う</text>
+      <!-- 保険会社 -->
+      <rect x="152" y="12" width="112" height="26" rx="6" fill="#85ccca" stroke="#2d8a87" stroke-width="1.5"/>
+      <text x="208" y="28" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">保険会社</text>
+      <!-- 保険金 arrow -->
+      <line x1="264" y1="25" x2="328" y2="25" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr-pm)"/>
+      <text x="296" y="20" font-size="7.5" fill="#92400e" text-anchor="middle">保険金を払う</text>
+      <!-- 受取人 -->
+      <rect x="332" y="12" width="80" height="26" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="372" y="28" font-size="10" fill="#92400e" text-anchor="middle" font-weight="700">受取人</text>
+      <!-- 被保険者 (below 保険会社) -->
+      <line x1="208" y1="38" x2="208" y2="49" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#arr-pd)"/>
+      <rect x="155" y="49" width="106" height="14" rx="4" fill="#f8fafa" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3,2"/>
+      <text x="208" y="59" font-size="8" fill="#64748b" text-anchor="middle">被保険者（保障の対象）</text>
+    </svg>
+    <div class="grid g3">
+      <div class="card"><h3>契約者</h3><p>保険契約を結び保険料を支払う人<br>被保険者と異なるケースもある</p></div>
+      <div class="card ac"><h3>被保険者</h3><p>保障の対象になる人<br>告知義務を負う</p></div>
+      <div class="card"><h3>受取人</h3><p>保険金・給付金を受け取る人<br>死亡保険金は要指定</p></div>
+    </div>
+    <ul>
+      <li>3者が同一のケース（例：自分で自分に医療保険をかける）</li>
+      <li>3者が異なるケース（例：夫が契約者・妻が被保険者・子が受取人）</li>
+      <li>3者の関係によって税務上の取り扱いが変わる</li>
+    </ul>
+    <div class="card ac" style="margin-top:.1rem">
+      <h3>よくある組み合わせ例</h3>
+      <p>夫（被保険者・契約者）× 妻（受取人）：夫に万が一があったとき妻が保険金を受取。この場合の保険金は<strong>相続税の課税対象</strong>になる点に注意（非課税限度額：500万円 × 法定相続人の数）</p>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>専門用語③ 契約まわりの用語</h2>
+  <div class="body">
+    <ul>
+      <li><strong>主契約</strong>：保険の本体。特約だけでは成立しない</li>
+      <li><strong>特約</strong>：主契約に付加するオプション。主契約が消えると特約も消える</li>
+      <li><strong>告知</strong>：健康状態・職業などを正直に申告すること</li>
+      <li><strong>告知義務違反</strong>：虚偽の告知は保険金不払い・契約解除のリスクがある</li>
+      <li><strong>責任開始日</strong>：保障がスタートする日（申込・告知・第1回保険料払込が揃った日）</li>
+    </ul>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>告知義務違反 ― 保険金が出ないケース</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card am">
+        <h3>よくあるNG告知の例</h3>
+        <ul>
+          <li>過去の通院歴を「忘れていた」として未記入</li>
+          <li>処方薬を服用中なのに「なし」と記入</li>
+          <li>喫煙歴を実態より少なく申告</li>
+          <li>職業欄を実態と異なる職種で申告（リスク軽減目的）</li>
+          <li>既往歴がある部位への手術を告知しない</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>違反が発覚した場合のリスク</h3>
+        <ul>
+          <li>契約解除・保険金不払いの対象になる</li>
+          <li>責任開始から<strong>2年以内</strong>は特に解除されやすい</li>
+          <li>故意・重大な過失は2年経過後も解除される</li>
+          <li>告知義務違反は保険会社が医療機関に照会して発覚するケースあり</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-a">💡 「書かなきゃバレない」ではなく「正直に告知して通る商品を選ぶ」がプロの仕事。告知書の記入は一緒に丁寧に確認する</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>専門用語④ お金まわりの用語</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card ac"><h3>解約返戻金</h3><p>途中解約時に戻ってくるお金。<br>掛け捨て型はゼロ。貯蓄型は増える</p></div>
+      <div class="card"><h3>満期金</h3><p>保険期間満了時に受け取るお金。<br>養老保険・学資保険にある</p></div>
+      <div class="card am"><h3>払戻率</h3><p>払い込んだ保険料合計に対する<br>返戻金の割合（%）</p></div>
+      <div class="card gr"><h3>生命保険料控除</h3><p>年末調整で所得控除が受けられる税制メリット。<br>一般・個人年金・介護医療の3枠がある</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>専門用語⑤ 期間・払込まわりの用語</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card"><h3>保険期間</h3><p>保障が続く期間。定期なら10年・20年・60歳まで等</p></div>
+      <div class="card"><h3>払込期間</h3><p>保険料を払い続ける期間。保険期間と異なる場合がある</p></div>
+      <div class="card ac"><h3>全期払い</h3><p>保険期間と払込期間が同じ。終身なら一生払い続ける</p></div>
+      <div class="card ac"><h3>短期払い</h3><p>保険期間より短く払い終える。60歳払済・10年払済など</p></div>
+      <div class="card"><h3>払込頻度</h3><p>月払・半年払・年払。年払は月払より割安になる</p></div>
+      <div class="card am"><h3>一時払い</h3><p>保険料を一度にまとめて払い込む。相続対策でも活用</p></div>
+    </div>
+    <div class="box-b">📌 短期払いは払込総額は高いが、払い終えた後は保障だけが続く。老後の保険料ゼロが実現できる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>第1回 まとめ</h2>
+  <div class="body">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>保険の仕組み：「多くの人がリスクを分け合う相互扶助。大数の法則で月数千円の保険料が成立する」</p></div>
+      <div class="goal"><div class="gn">2</div><p>公的保障のギャップ：「高額療養費の対象外費用・老後2,000万問題・就業不能時の収入消失が保険の必要性を作る」</p></div>
+      <div class="goal"><div class="gn">3</div><p>専門用語：「保険料・保険金・給付金の違い、契約者・被保険者・受取人の役割、主契約と特約の関係」</p></div>
+    </div>
+    <div class="box-b">📌 次回（第2回）は保険の3形態（定期・終身・養老）と貯蓄型商品を扱います。今日覚えた用語が土台になります</div>
+  </div>
+</div>
+
+<div class="slide s-qa">
+  <h2>Q &amp; A</h2>
+  <p>疑問点・確認したい用語を自由に質問してください</p>
+</div>
+
+</div>
+<nav class="nav">
+  <button class="btn" id="prev" disabled>‹</button>
+  <span class="cnt" id="c"></span>
+  <button class="btn" id="next">›</button>
+  <button class="edit-btn" id="editBtn">編集</button>
+  <button class="save-btn" id="saveBtn">HTMLを保存</button>
+</nav>
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0,total=slides.length;
+function go(n){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(n,total-1));slides[cur].classList.add('active');document.getElementById('c').textContent=`${cur+1} / ${total}`;document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===total-1;}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+go(0);
+
+let editMode=false;
+const editBtn=document.getElementById('editBtn');
+const saveBtn=document.getElementById('saveBtn');
+const SELS='h1,h2,h3,p,.badge,.ch,.box-a,.box-b,.box-g';
+
+function toggleEdit(){
+  editMode=!editMode;
+  document.querySelectorAll(SELS).forEach(el=>{el.contentEditable=editMode?'true':'false';});
+  editBtn.textContent=editMode?'編集終了':'編集';
+  editBtn.classList.toggle('on',editMode);
+  saveBtn.style.display=editMode?'inline-block':'none';
+}
+
+function saveHTML(){
+  document.querySelectorAll(SELS).forEach(el=>el.removeAttribute('contenteditable'));
+  editMode=false;
+  editBtn.textContent='編集';
+  editBtn.classList.remove('on');
+  saveBtn.style.display='none';
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=document.title+'.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+editBtn.onclick=toggleEdit;
+saveBtn.onclick=saveHTML;
+</script>
+</body>
+</html>

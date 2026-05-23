@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第3回 | 保険基礎知識研修</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#85ccca;--bd:#2d8a87;--bdd:#1a5e5c;--bl:#e0f5f5;--bll:#f0fafa;
+  --amber:#f59e0b;--al:#fef3c7;
+  --green:#059669;--gl:#d1fae5;
+  --text:#0f172a;--text-2:#334155;--muted:#64748b;
+  --bg:#fff;--surface:#f8fafa;--border:#d4eeee;
+}
+body{font-family:system-ui,-apple-system,'Hiragino Sans','Yu Gothic UI',sans-serif;background:#daeeed;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+.deck{width:min(1100px,94vw);aspect-ratio:16/9;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:14px;border:2.5px solid var(--brand);overflow:hidden}
+.slide{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:all}
+.bar{height:4px;background:var(--brand);flex-shrink:0}
+strong{font-weight:700}
+
+/* Logo */
+.logo-title{height:clamp(50px,7vw,80px);opacity:.85}
+.logo-mk{position:absolute;top:.35rem;right:.7rem;height:clamp(14px,1.8vw,20px);opacity:.45}
+
+/* Title */
+.s-title{background:#fff;justify-content:center;align-items:center;gap:.85rem;text-align:center;padding:2.5rem 3rem}
+.badge{background:var(--bll);color:var(--bd);padding:.35rem 1.2rem;border-radius:99px;font-size:clamp(.78rem,1.2vw,.92rem);letter-spacing:.04em;border:1.5px solid var(--brand);font-weight:500}
+.s-title h1{color:var(--text);font-size:clamp(1.6rem,3.5vw,2.7rem);font-weight:700;line-height:1.3}
+.s-title .meta{color:var(--muted);font-size:clamp(.82rem,1.3vw,.98rem)}
+
+/* Section */
+.s-section{background:var(--bl);justify-content:flex-end;padding:2.5rem 3rem;gap:.55rem;border-left:6px solid var(--brand)}
+.s-section .ch{color:var(--bd);font-size:clamp(.72rem,1.1vw,.88rem);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.s-section h2{color:var(--bdd);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.3}
+
+/* Content */
+.s-content{padding:1.4rem 2.4rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:.75rem}
+.s-content>h2{color:var(--bdd);font-size:clamp(1.05rem,1.9vw,1.45rem);font-weight:700;padding-bottom:.55rem;border-bottom:2.5px solid var(--brand);flex-shrink:0}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.6rem}
+
+ul{list-style:none;display:flex;flex-direction:column;gap:.48rem}
+li{display:flex;align-items:flex-start;gap:.55rem;font-size:clamp(.9rem,1.45vw,1.1rem);line-height:1.6;color:var(--text)}
+li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin-top:.24em}
+.sub li::before{content:'–';color:var(--muted)}
+.sub{padding-left:1.2rem}
+
+.grid{display:grid;gap:.75rem}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.card h3{font-size:clamp(.88rem,1.38vw,1.08rem);font-weight:700;color:var(--bdd);margin-bottom:.38rem}
+.card p,.card li{font-size:clamp(.8rem,1.22vw,.94rem);color:var(--text-2);line-height:1.52}
+.card.ac{border-color:var(--brand);background:var(--bll)}
+.card.ac h3{color:var(--bd)}
+.card.am{border-color:var(--amber);background:var(--al)}
+.card.am h3{color:#92400e}
+.card.gr{border-color:var(--green);background:var(--gl)}
+.card.gr h3{color:var(--green)}
+
+.box-a{background:var(--al);border-left:4px solid var(--amber);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-b{background:var(--bll);border-left:4px solid var(--brand);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-g{background:var(--gl);border-left:4px solid var(--green);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+
+.goal-list{display:flex;flex-direction:column;gap:.6rem}
+.goal{display:flex;align-items:center;gap:.85rem;background:var(--bll);padding:.8rem 1.1rem;border-radius:10px;border:1.5px solid var(--border)}
+.gn{min-width:1.8rem;height:1.8rem;background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+.goal p{font-size:clamp(.9rem,1.45vw,1.1rem);color:var(--text);line-height:1.5}
+
+/* QA */
+.s-qa{background:var(--bl);justify-content:center;align-items:center;gap:1rem;text-align:center;border-left:6px solid var(--brand)}
+.s-qa h2{color:var(--bdd);font-size:clamp(2rem,4vw,3.2rem);font-weight:700}
+.s-qa p{color:var(--bd);font-size:clamp(.9rem,1.45vw,1.1rem)}
+
+/* Nav */
+.nav{display:flex;align-items:center;gap:1rem}
+.btn{width:2.4rem;height:2.4rem;background:rgba(133,204,202,.15);border:1.5px solid rgba(133,204,202,.5);color:var(--bd);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.btn:hover{background:rgba(133,204,202,.3)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.cnt{color:var(--bd);font-size:.82rem;min-width:3.5rem;text-align:center}
+
+/* Edit mode */
+.edit-btn{padding:.38rem .95rem;background:rgba(133,204,202,.15);border:1.5px solid var(--brand);color:var(--bd);border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:inherit}
+.edit-btn:hover{background:rgba(133,204,202,.28)}
+.edit-btn.on{background:var(--brand);color:#fff}
+.save-btn{padding:.38rem .95rem;background:var(--bdd);border:none;color:#fff;border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;display:none}
+.save-btn:hover{background:var(--bd)}
+[contenteditable="true"]{outline:1.5px dashed var(--brand) !important;border-radius:3px;min-height:1em}
+</style>
+</head>
+<body>
+<div id="pw-gate" style="position:fixed;inset:0;background:#1a5e5c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;z-index:9999">
+  <p style="color:#e0f5f5;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;letter-spacing:.06em">保険基礎知識研修</p>
+  <p style="color:#85ccca;font-size:clamp(.82rem,1.4vw,.98rem)">パスワードを入力してください</p>
+  <div style="display:flex;gap:.6rem">
+    <input id="pw-input" type="password" placeholder="password" style="padding:.65rem 1rem;border-radius:8px;border:none;font-size:1rem;outline:none;width:220px;font-family:inherit">
+    <button onclick="checkPw()" style="padding:.65rem 1.3rem;background:#85ccca;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;color:#1a5e5c;font-family:inherit">入室</button>
+  </div>
+  <p id="pw-err" style="color:#fca5a5;font-size:.85rem;min-height:1em"></p>
+</div>
+<script>
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
+if(sessionStorage.getItem('kisochisiki-auth')==='ok')document.getElementById('pw-gate').style.display='none';
+function checkPw(){
+  if(document.getElementById('pw-input').value==='kisochisiki'){
+    sessionStorage.setItem('kisochisiki-auth','ok');
+    document.getElementById('pw-gate').style.display='none';
+  } else {
+    document.getElementById('pw-err').textContent='パスワードが違います';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+</script>
+
+<div class="deck">
+
+<div class="slide s-title active">
+  <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-title" alt="Unicara">
+  <span class="badge">保険基礎知識研修 ｜ 第3回 / 全4回</span>
+  <h1>第3回<br>第三分野・死亡保障</h1>
+  <p class="meta">RS新入社員研修</p>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>今日のゴール</h2>
+  <div class="body">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>医療保険・がん保険・就業不能保険の違いと特徴を説明できる</p></div>
+      <div class="goal"><div class="gn">2</div><p>特約の組み合わせ方の基本を理解する</p></div>
+      <div class="goal"><div class="gn">3</div><p>収入保障保険と定期保険の使い分けが分かる</p></div>
+    </div>
+    <div class="box-b">📌 第三分野は当社2軸のひとつ。両フロント（資産形成・第三分野）に必ず登場する</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">第三分野</span>
+  <h2>医療保険・がん保険・就業不能保険</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>第三分野の位置づけ</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card"><h3>生命保険</h3><p>死亡・高度障害<br>「亡くなるリスク」に備える</p></div>
+      <div class="card ac"><h3>第三分野 ★</h3><p>病気・ケガ<br>「生きている間に困るリスク」<br>どちらにも属さない</p></div>
+      <div class="card"><h3>損害保険</h3><p>モノ・賠償<br>「財産のリスク」に備える</p></div>
+    </div>
+    <ul>
+      <li>医療保険・がん保険・就業不能保険がメイン商品</li>
+      <li>変額保険（貯蓄型）とセットで提案するケースが多い → 当社2軸の理由</li>
+    </ul>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>医療保険</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div>
+        <ul>
+          <li><strong>入院給付金</strong>：1日あたり5,000〜10,000円</li>
+          <li><strong>手術給付金</strong>：入院手術と外来手術で給付額が異なる</li>
+          <li><strong>通院給付金</strong>：退院後の通院も対応しているか確認が必要</li>
+          <li><strong>日帰り入院対応</strong>：平均在院日数が短縮しているため重要</li>
+          <li><strong>先進医療特約</strong>：公的保険が使えない治療の技術料をカバー</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.65rem">
+        <div class="card ac">
+          <h3>保障額の決め方</h3>
+          <ul>
+            <li>高額療養費制度の自己負担（月8〜9万円）との差分</li>
+            <li>差額ベッド代・先進医療・通院費を加味</li>
+            <li>日額5,000円 or 10,000円が一般的</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>医療保険 ― 保障額の考え方（シミュレーション）</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card">
+        <h3>実際にかかる費用（10日入院の例）</h3>
+        <ul>
+          <li>高額療養費後の自己負担：約8〜9万円</li>
+          <li>差額ベッド代（個室4日分）：約2〜4万円</li>
+          <li>食事代（10日・3食）：約1万4,000円</li>
+          <li>通院交通費・日用品・雑費：約1〜2万円</li>
+          <li>合計：<strong>約12〜16万円</strong></li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>医療保険でカバーするイメージ</h3>
+        <ul>
+          <li>入院給付金：10,000円×10日＝<strong>10万円</strong></li>
+          <li>手術給付金：10万円（例）</li>
+          <li>先進医療特約（使用時）：技術料全額</li>
+          <li>→ 給付金合計：<strong>20万円以上も可能</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 医療保険の保障設定は「入院1日いくら」だけでなく、手術給付・先進医療・通院給付の有無も確認してから設計する</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>がん保険</h2>
+  <div class="body">
+    <ul>
+      <li>日本人の<strong>2人に1人</strong>が生涯でがんになる</li>
+      <li><strong>診断一時金</strong>：100〜300万円が目安（使途自由・すぐ使える）</li>
+      <li><strong>通院治療給付</strong>：抗がん剤・放射線治療は今や通院が中心 → 通院対応が必須</li>
+      <li>がん治療の実態：長期化・高額化している（数百万円になることも）</li>
+      <li>初めてのがんと再発の扱いは商品によって異なる → 確認必要</li>
+    </ul>
+    <div class="grid g2" style="margin-top:.25rem">
+      <div class="card"><h3>医療保険との違い</h3><ul><li>医療保険：がん以外も幅広くカバー</li><li>がん保険：がんに特化・一時金が大きい</li></ul></div>
+      <div class="card gr"><h3>組み合わせ方</h3><ul><li>医療保険＋がん保険が基本</li><li>がんリスクを重視するほどがん保険を厚くする</li></ul></div>
+    </div>
+    <div class="box-a">💡 最新のがん統計（国立がん研究センター）：累積リスクで男性65%・女性51%。年間100万人超が新規診断を受ける</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>がん保険 ― 現代のがん治療の実態</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card">
+        <h3>治療の長期化</h3>
+        <p>平均的ながん治療期間は数ヶ月〜数年。初期段階で完治するケースもあるが、再発・転移後の治療は長期になりやすい。職場復帰しながら治療を続けるケースも多い</p>
+      </div>
+      <div class="card am">
+        <h3>費用の高額化</h3>
+        <p>免疫チェックポイント阻害剤（オプジーボ等）は年間数百万円規模。保険適用後も高額療養費の自己負担が毎月発生し続ける。治療期間が長ければ総額は数百万円超になる</p>
+      </div>
+      <div class="card">
+        <h3>通院中心へのシフト</h3>
+        <p>かつては入院中心だったが、現在は抗がん剤・放射線治療の多くが外来（通院）で実施される。入院給付金だけでは費用をカバーできない</p>
+      </div>
+    </div>
+    <div class="box-a">⚠️ 医療保険の入院給付金では対応しきれないのが今のがん治療。「診断一時金（使途自由）」と「通院治療給付」がセットになったがん保険が必要な理由はここにある</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>就業不能保険</h2>
+  <div class="body">
+    <ul>
+      <li>「働けない」状態が一定期間続いた場合に給付される</li>
+      <li><strong>免責期間</strong>（60日・90日等）：すぐには給付されない点に注意</li>
+      <li><strong>給付額の目安</strong>：給与の50〜70%程度</li>
+      <li>傷病手当金（1年6ヶ月）が終わった後のギャップを埋める商品</li>
+      <li>精神疾患の扱い：商品によって支払い対象に含まれるかが異なる</li>
+      <li>自営業・フリーランスには特に重要（傷病手当金がない）</li>
+    </ul>
+    <div class="box-a">💡 傷病手当金は最長1年6ヶ月・その後は収入ゼロ。このギャップを伝えることがニーズ喚起になる</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>就業不能保険 ― 収入ギャップをどう埋めるか</h2>
+  <div class="body">
+    <svg viewBox="0 0 460 68" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.35rem;flex-shrink:0">
+      <defs>
+        <marker id="arr-gi" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <polygon points="0,0 6,3 0,6" fill="#94a3b8"/>
+        </marker>
+      </defs>
+      <!-- Y axis -->
+      <line x1="46" y1="4" x2="46" y2="55" stroke="#cbd5e1" stroke-width="1" marker-end="url(#arr-gi)"/>
+      <text x="44" y="13" font-size="7.5" fill="#94a3b8" text-anchor="end">100%</text>
+      <text x="44" y="29" font-size="7.5" fill="#94a3b8" text-anchor="end">67%</text>
+      <text x="44" y="50" font-size="7.5" fill="#94a3b8" text-anchor="end">20%</text>
+      <!-- X axis -->
+      <line x1="46" y1="57" x2="455" y2="57" stroke="#cbd5e1" stroke-width="1"/>
+      <!-- Phase 1: 有給消化 (100%) -->
+      <rect x="50" y="10" width="75" height="47" rx="0" fill="#85ccca"/>
+      <!-- Phase 2: 傷病手当金 (67%) -->
+      <rect x="125" y="25" width="155" height="32" rx="0" fill="#85ccca" opacity="0.75"/>
+      <rect x="125" y="10" width="155" height="15" rx="0" fill="#fca5a5" opacity="0.5"/>
+      <text x="202" y="20" font-size="7" fill="#b91c1c" text-anchor="middle">収入減 −33%</text>
+      <!-- Phase 3: 1年6ヶ月以降 (20%) -->
+      <rect x="280" y="47" width="165" height="10" rx="0" fill="#f59e0b"/>
+      <rect x="280" y="10" width="165" height="37" rx="0" fill="#fca5a5" opacity="0.35"/>
+      <text x="362" y="25" font-size="7.5" fill="#b91c1c" text-anchor="middle" font-weight="600">収入ギャップ</text>
+      <text x="362" y="35" font-size="7" fill="#b91c1c" text-anchor="middle">▼25〜28万円/月</text>
+      <!-- Phase dividers -->
+      <line x1="125" y1="55" x2="125" y2="60" stroke="#94a3b8" stroke-width="1"/>
+      <line x1="280" y1="55" x2="280" y2="60" stroke="#94a3b8" stroke-width="1"/>
+      <!-- X axis labels -->
+      <text x="87" y="65" font-size="7" fill="#64748b" text-anchor="middle">発症〜有給</text>
+      <text x="202" y="65" font-size="7" fill="#64748b" text-anchor="middle">傷病手当金（最長18ヶ月）</text>
+      <text x="362" y="65" font-size="7" fill="#64748b" text-anchor="middle">1年6ヶ月以降</text>
+    </svg>
+    <div class="grid g2">
+      <div class="card">
+        <h3>モデルケース（月収35万円・会社員）</h3>
+        <ul>
+          <li>発症直後〜有給消化：月収ほぼ維持</li>
+          <li>傷病手当金期間（最長18ヶ月）：約23万円/月</li>
+          <li>1年6ヶ月以降：傷病手当金ゼロ</li>
+          <li>障害年金は月7〜10万円程度（認定が厳しい）</li>
+          <li>→ <strong>毎月25〜28万円が消える</strong></li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>就業不能保険で補う</h3>
+        <ul>
+          <li>免責期間（60〜90日）経過後に給付スタート</li>
+          <li>給付額の目安：月20〜25万円</li>
+          <li>傷病手当金終了後に月収に近い水準を維持</li>
+          <li>精神疾患対応型なら5大疾病＋うつ病も対象</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 傷病手当金（1年6ヶ月）が終わった後の収入が問題。就業不能保険は「傷病手当金の終了後」に真価を発揮する保険</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>特約の考え方</h2>
+  <div class="body">
+    <svg viewBox="0 0 460 66" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.35rem;flex-shrink:0">
+      <!-- Main contract box -->
+      <rect x="8" y="14" width="122" height="38" rx="6" fill="#85ccca" stroke="#2d8a87" stroke-width="1.5"/>
+      <text x="69" y="30" font-size="9.5" fill="#fff" text-anchor="middle" font-weight="700">主契約</text>
+      <text x="69" y="43" font-size="7.5" fill="#e0f5f5" text-anchor="middle">（医療保険・終身保険等）</text>
+      <!-- Branch lines -->
+      <line x1="130" y1="33" x2="163" y2="33" stroke="#85ccca" stroke-width="1.5"/>
+      <line x1="163" y1="13" x2="163" y2="54" stroke="#85ccca" stroke-width="1.5"/>
+      <!-- Rider 1 -->
+      <line x1="163" y1="14" x2="176" y2="14" stroke="#85ccca" stroke-width="1.5"/>
+      <rect x="176" y="6" width="102" height="17" rx="4" fill="#e0f5f5" stroke="#85ccca" stroke-width="1"/>
+      <text x="227" y="17" font-size="8" fill="#2d8a87" text-anchor="middle" font-weight="600">先進医療特約</text>
+      <!-- Rider 2 -->
+      <line x1="163" y1="33" x2="176" y2="33" stroke="#85ccca" stroke-width="1.5"/>
+      <rect x="176" y="24" width="102" height="17" rx="4" fill="#e0f5f5" stroke="#85ccca" stroke-width="1"/>
+      <text x="227" y="35" font-size="8" fill="#2d8a87" text-anchor="middle" font-weight="600">三大疾病特約</text>
+      <!-- Rider 3 -->
+      <line x1="163" y1="54" x2="176" y2="54" stroke="#85ccca" stroke-width="1.5"/>
+      <rect x="176" y="43" width="102" height="17" rx="4" fill="#e0f5f5" stroke="#85ccca" stroke-width="1"/>
+      <text x="227" y="54" font-size="8" fill="#2d8a87" text-anchor="middle" font-weight="600">払込免除特約</text>
+      <!-- Arrow to warning -->
+      <text x="300" y="36" font-size="13" fill="#94a3b8" text-anchor="middle">→</text>
+      <!-- Warning box: 解約すると全消滅 -->
+      <rect x="316" y="4" width="138" height="58" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="385" y="20" font-size="8.5" fill="#dc2626" text-anchor="middle" font-weight="700">主契約を解約すると</text>
+      <text x="385" y="32" font-size="8" fill="#dc2626" text-anchor="middle">特約はすべて自動消滅</text>
+      <text x="385" y="44" font-size="7.5" fill="#dc2626" text-anchor="middle">先進医療・三大疾病・払込免除</text>
+      <text x="385" y="55" font-size="7.5" fill="#dc2626" text-anchor="middle">→ 同時に終了</text>
+    </svg>
+    <div class="grid g2">
+      <div>
+        <ul>
+          <li><strong>主契約</strong>：保険の本体（医療保険・終身保険など）</li>
+          <li><strong>特約</strong>：主契約に付加するオプション</li>
+          <li>主契約が消えると特約も消える（注意点）</li>
+          <li>特約で付けるか別の保険にするかの判断：主契約を解約する可能性がある場合は別契約の方が安全</li>
+        </ul>
+      </div>
+      <div>
+        <div class="card ac">
+          <h3>よく使われる特約</h3>
+          <ul>
+            <li>先進医療特約：技術料実費保障</li>
+            <li>三大疾病特約：がん・急性心筋梗塞・脳卒中</li>
+            <li>保険料払込免除特約：所定の状態になったら払込不要</li>
+            <li>介護特約：要介護状態になったとき</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="box-b">📌 特約は主契約が消えると一緒に消える。お客様が「がん特約だけ残したい」と言っても主契約を解約すると消滅する点を必ず説明する</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">死亡保障</span>
+  <h2>収入保障保険・定期保険</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>死亡保障が必要な理由</h2>
+  <div class="body">
+    <ul>
+      <li>遺族が生活を維持するための資金を確保する</li>
+      <li>扶養家族がいる人に必要性が高い（独身は薄くてよい）</li>
+      <li><strong>必要保障額の計算</strong>：遺族の生活費 × 年数 − 公的遺族年金</li>
+      <li>黄金ルートでは第三分野プレゼンの後にニーズ喚起を行う（第三分野フロント5回目）</li>
+    </ul>
+    <div class="grid g2" style="margin-top:.25rem">
+      <div class="card"><h3>公的遺族年金</h3><ul><li>18歳未満の子がいれば遺族厚生年金が出る</li><li>ただし金額は十分でないことが多い</li></ul></div>
+      <div class="card ac"><h3>死亡保障2商品</h3><ul><li>収入保障保険：毎月給付型</li><li>定期保険：一時金型</li></ul></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>必要保障額 ― どのくらいの死亡保障が必要か</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card">
+        <h3>必要保障額の計算例</h3>
+        <ul>
+          <li>遺族の生活費（月25万×12ヶ月×30年）：9,000万円</li>
+          <li>住宅ローン残高：2,500万円（団信未加入の場合）</li>
+          <li>合計必要額：<strong>1億1,500万円</strong></li>
+          <li>マイナス 遺族年金（月10〜12万×20年）：約2,400万円</li>
+          <li>マイナス 配偶者収入・貯蓄：約3,000万円</li>
+          <li>→ <strong>必要保障額：約6,100万円</strong></li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>ポイント解説</h3>
+        <ul>
+          <li>子どもが独立すると遺族年金は大幅減（子の加算がなくなる）</li>
+          <li>住宅ローンは<strong>団信加入で死亡時に相殺</strong>されるケースが多い</li>
+          <li>末子が成人するまでが最もリスクが高い期間</li>
+          <li>収入保障保険はこの「高リスク期間」に合わせた設計に最適</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 必要保障額は時間の経過とともに減少する。だから収入保障（残り期間で変わる）が合理的</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>収入保障保険 vs 定期保険</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card ac">
+        <h3>収入保障保険</h3>
+        <ul>
+          <li>死亡時に毎月一定額が支払われる</li>
+          <li>保険期間が進むほど総受取額が減る（残り期間が短くなるため）</li>
+          <li>定期保険より保険料が安い</li>
+          <li>向いている人：毎月の生活費を補いたい人・保険料を抑えたい人</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>定期保険</h3>
+        <ul>
+          <li>死亡時に一時金で受け取る</li>
+          <li>満期金なし・解約返戻金なし</li>
+          <li>使途の自由度が高い（住宅ローン一括返済等）</li>
+          <li>向いている人：まとまったお金で対応したい人</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 どちらを選ぶか：まとまった資金ニーズ→定期保険、毎月の生活費補填→収入保障保険</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>第3回 まとめ</h2>
+  <div class="body">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>第三分野の役割：「生命保険でも損害保険でもない『生きているリスク』に対応。当社の2軸の1つ」</p></div>
+      <div class="goal"><div class="gn">2</div><p>保障の種類と選択：「医療保険（入院・手術）＋がん保険（診断一時金・通院）＋就業不能保険（収入補填）の3つが基本セット」</p></div>
+      <div class="goal"><div class="gn">3</div><p>死亡保障の設計：「必要保障額は時間とともに減少する → 収入保障が合理的。一時金が必要なら定期保険を組み合わせる」</p></div>
+    </div>
+    <div class="box-b">📌 次回（第4回）はライフステージ別の商品組み合わせとクロスセル商材。今回学んだ商品をどう組み合わせるかが実践の核心</div>
+  </div>
+</div>
+
+<div class="slide s-qa">
+  <h2>Q &amp; A</h2>
+  <p>疑問点・確認したい商品知識を自由に質問してください</p>
+</div>
+
+</div>
+<nav class="nav">
+  <button class="btn" id="prev" disabled>‹</button>
+  <span class="cnt" id="c"></span>
+  <button class="btn" id="next">›</button>
+  <button class="edit-btn" id="editBtn">編集</button>
+  <button class="save-btn" id="saveBtn">HTMLを保存</button>
+</nav>
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0,total=slides.length;
+function go(n){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(n,total-1));slides[cur].classList.add('active');document.getElementById('c').textContent=`${cur+1} / ${total}`;document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===total-1;}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+go(0);
+
+let editMode=false;
+const editBtn=document.getElementById('editBtn');
+const saveBtn=document.getElementById('saveBtn');
+const SELS='h1,h2,h3,p,.badge,.ch,.box-a,.box-b,.box-g';
+
+function toggleEdit(){
+  editMode=!editMode;
+  document.querySelectorAll(SELS).forEach(el=>{el.contentEditable=editMode?'true':'false';});
+  editBtn.textContent=editMode?'編集終了':'編集';
+  editBtn.classList.toggle('on',editMode);
+  saveBtn.style.display=editMode?'inline-block':'none';
+}
+
+function saveHTML(){
+  document.querySelectorAll(SELS).forEach(el=>el.removeAttribute('contenteditable'));
+  editMode=false;
+  editBtn.textContent='編集';
+  editBtn.classList.remove('on');
+  saveBtn.style.display='none';
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=document.title+'.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+editBtn.onclick=toggleEdit;
+saveBtn.onclick=saveHTML;
+</script>
+</body>
+</html>

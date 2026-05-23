@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第2回 | 保険基礎知識研修</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#85ccca;--bd:#2d8a87;--bdd:#1a5e5c;--bl:#e0f5f5;--bll:#f0fafa;
+  --amber:#f59e0b;--al:#fef3c7;
+  --green:#059669;--gl:#d1fae5;
+  --text:#0f172a;--text-2:#334155;--muted:#64748b;
+  --bg:#fff;--surface:#f8fafa;--border:#d4eeee;
+}
+body{font-family:system-ui,-apple-system,'Hiragino Sans','Yu Gothic UI',sans-serif;background:#daeeed;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+.deck{width:min(1100px,94vw);aspect-ratio:16/9;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:14px;border:2.5px solid var(--brand);overflow:hidden}
+.slide{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:all}
+.bar{height:4px;background:var(--brand);flex-shrink:0}
+strong{font-weight:700}
+
+/* Logo */
+.logo-title{height:clamp(50px,7vw,80px);opacity:.85}
+.logo-mk{position:absolute;top:.35rem;right:.7rem;height:clamp(14px,1.8vw,20px);opacity:.45}
+
+/* Title */
+.s-title{background:#fff;justify-content:center;align-items:center;gap:.85rem;text-align:center;padding:2.5rem 3rem}
+.badge{background:var(--bll);color:var(--bd);padding:.35rem 1.2rem;border-radius:99px;font-size:clamp(.78rem,1.2vw,.92rem);letter-spacing:.04em;border:1.5px solid var(--brand);font-weight:500}
+.s-title h1{color:var(--text);font-size:clamp(1.6rem,3.5vw,2.7rem);font-weight:700;line-height:1.3}
+.s-title .meta{color:var(--muted);font-size:clamp(.82rem,1.3vw,.98rem)}
+
+/* Section */
+.s-section{background:var(--bl);justify-content:flex-end;padding:2.5rem 3rem;gap:.55rem;border-left:6px solid var(--brand)}
+.s-section .ch{color:var(--bd);font-size:clamp(.72rem,1.1vw,.88rem);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.s-section h2{color:var(--bdd);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;line-height:1.3}
+
+/* Content */
+.s-content{padding:1.4rem 2.4rem 1.5rem;flex:1;display:flex;flex-direction:column;gap:.75rem}
+.s-content>h2{color:var(--bdd);font-size:clamp(1.05rem,1.9vw,1.45rem);font-weight:700;padding-bottom:.55rem;border-bottom:2.5px solid var(--brand);flex-shrink:0}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.6rem}
+
+ul{list-style:none;display:flex;flex-direction:column;gap:.48rem}
+li{display:flex;align-items:flex-start;gap:.55rem;font-size:clamp(.9rem,1.45vw,1.1rem);line-height:1.6;color:var(--text)}
+li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin-top:.24em}
+.sub li::before{content:'–';color:var(--muted)}
+.sub{padding-left:1.2rem}
+
+.grid{display:grid;gap:.75rem}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem}
+.card h3{font-size:clamp(.88rem,1.38vw,1.08rem);font-weight:700;color:var(--bdd);margin-bottom:.38rem}
+.card p,.card li{font-size:clamp(.8rem,1.22vw,.94rem);color:var(--text-2);line-height:1.52}
+.card.ac{border-color:var(--brand);background:var(--bll)}
+.card.ac h3{color:var(--bd)}
+.card.am{border-color:var(--amber);background:var(--al)}
+.card.am h3{color:#92400e}
+.card.gr{border-color:var(--green);background:var(--gl)}
+.card.gr h3{color:var(--green)}
+
+.box-a{background:var(--al);border-left:4px solid var(--amber);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-b{background:var(--bll);border-left:4px solid var(--brand);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+.box-g{background:var(--gl);border-left:4px solid var(--green);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
+
+.goal-list{display:flex;flex-direction:column;gap:.6rem}
+.goal{display:flex;align-items:center;gap:.85rem;background:var(--bll);padding:.8rem 1.1rem;border-radius:10px;border:1.5px solid var(--border)}
+.gn{min-width:1.8rem;height:1.8rem;background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+.goal p{font-size:clamp(.9rem,1.45vw,1.1rem);color:var(--text);line-height:1.5}
+
+/* Tags */
+.tag{display:inline-block;padding:.14rem .52rem;border-radius:4px;font-size:clamp(.7rem,1.02vw,.84rem);font-weight:600;margin-bottom:.3rem}
+.tag-blue{background:var(--bll);color:var(--bd);border:1px solid var(--border)}
+.tag-amber{background:var(--al);color:#92400e}
+
+/* QA */
+.s-qa{background:var(--bl);justify-content:center;align-items:center;gap:1rem;text-align:center;border-left:6px solid var(--brand)}
+.s-qa h2{color:var(--bdd);font-size:clamp(2rem,4vw,3.2rem);font-weight:700}
+.s-qa p{color:var(--bd);font-size:clamp(.9rem,1.45vw,1.1rem)}
+
+/* Nav */
+.nav{display:flex;align-items:center;gap:1rem}
+.btn{width:2.4rem;height:2.4rem;background:rgba(133,204,202,.15);border:1.5px solid rgba(133,204,202,.5);color:var(--bd);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.btn:hover{background:rgba(133,204,202,.3)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.cnt{color:var(--bd);font-size:.82rem;min-width:3.5rem;text-align:center}
+
+/* Edit mode */
+.edit-btn{padding:.38rem .95rem;background:rgba(133,204,202,.15);border:1.5px solid var(--brand);color:var(--bd);border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:inherit}
+.edit-btn:hover{background:rgba(133,204,202,.28)}
+.edit-btn.on{background:var(--brand);color:#fff}
+.save-btn{padding:.38rem .95rem;background:var(--bdd);border:none;color:#fff;border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;display:none}
+.save-btn:hover{background:var(--bd)}
+[contenteditable="true"]{outline:1.5px dashed var(--brand) !important;border-radius:3px;min-height:1em}
+</style>
+</head>
+<body>
+<div id="pw-gate" style="position:fixed;inset:0;background:#1a5e5c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;z-index:9999">
+  <p style="color:#e0f5f5;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;letter-spacing:.06em">保険基礎知識研修</p>
+  <p style="color:#85ccca;font-size:clamp(.82rem,1.4vw,.98rem)">パスワードを入力してください</p>
+  <div style="display:flex;gap:.6rem">
+    <input id="pw-input" type="password" placeholder="password" style="padding:.65rem 1rem;border-radius:8px;border:none;font-size:1rem;outline:none;width:220px;font-family:inherit">
+    <button onclick="checkPw()" style="padding:.65rem 1.3rem;background:#85ccca;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;color:#1a5e5c;font-family:inherit">入室</button>
+  </div>
+  <p id="pw-err" style="color:#fca5a5;font-size:.85rem;min-height:1em"></p>
+</div>
+<script>
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
+if(sessionStorage.getItem('kisochisiki-auth')==='ok')document.getElementById('pw-gate').style.display='none';
+function checkPw(){
+  if(document.getElementById('pw-input').value==='kisochisiki'){
+    sessionStorage.setItem('kisochisiki-auth','ok');
+    document.getElementById('pw-gate').style.display='none';
+  } else {
+    document.getElementById('pw-err').textContent='パスワードが違います';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+  }
+}
+</script>
+
+<div class="deck">
+
+<div class="slide s-title active">
+  <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-title" alt="Unicara">
+  <span class="badge">保険基礎知識研修 ｜ 第2回 / 全4回</span>
+  <h1>第2回<br>保険の3形態と貯蓄型商品</h1>
+  <p class="meta">RS新入社員研修</p>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>今日のゴール</h2>
+  <div class="body">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>定期・終身・養老の違いを説明できる</p></div>
+      <div class="goal"><div class="gn">2</div><p>貯蓄型の各商品の特徴と向いている人を言える</p></div>
+      <div class="goal"><div class="gn">3</div><p>変額保険の仕組みとリスクを正確に理解する</p></div>
+    </div>
+    <div class="box-b">📌 生命保険はすべて「定期・終身・養老」のいずれかの形がベース。まずここを押さえる</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">保険の3形態</span>
+  <h2>定期・終身・養老</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>保険の3形態 ― 全体像</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card">
+        <h3>定期保険</h3>
+        <ul>
+          <li>保障期間：10年・20年・60歳までなど期間限定</li>
+          <li>基本は返戻金なしだが、商品によって返戻金があるものも存在する</li>
+          <li>保険料は3形態の中で最も安く設計されやすい</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>終身保険</h3>
+        <ul>
+          <li>保障期間：一生涯（死亡すれば必ず保険金が出る）</li>
+          <li>死亡保障が主目的のため、返戻金のない終身型商品（医療保険など）も多い</li>
+          <li>貯蓄性がある商品は長期で解約返戻金が増加する</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>養老保険</h3>
+        <ul>
+          <li>保障期間：期間限定（満期あり）</li>
+          <li>満期時に死亡保険金と同額の満期金を受け取れる</li>
+          <li>死亡保障＋貯蓄を両立するため保険料は3形態で最も高い</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-a">💡 どんな生命保険商品も、この3形態のいずれかの構造をベースに作られている</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>定期保険</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div>
+        <ul>
+          <li>保障期間：10年・20年・60歳まで等、期間限定</li>
+          <li>満期金なし・解約返戻金なし</li>
+          <li>3形態で最も保険料が安い</li>
+          <li>保険期間が終われば保障も終わる（更新または再加入が必要）</li>
+          <li>向いている人：子育て中・住宅ローン返済中・保障を最大化したい人</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:.65rem">
+        <div class="card">
+          <h3>収入保障保険（定期の一種）</h3>
+          <ul>
+            <li>死亡時に一時金ではなく毎月一定額が支払われる</li>
+            <li>保険期間が進むほど総受取額が減る</li>
+            <li>定期保険より保険料が安くなるケースが多い</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>終身保険</h2>
+  <div class="body">
+    <ul>
+      <li>保障期間：一生涯（死亡すれば必ず保険金が出る）</li>
+      <li>解約返戻金：払い込むほど増加し、長期で元本を超える</li>
+      <li>活用場面：葬儀費用・相続対策・資産形成</li>
+      <li><strong>払込期間の選択</strong>で保険料が変わる
+        <ul class="sub">
+          <li>全期払い（終身払い）：一生払い続ける → 月々の保険料が最も安い</li>
+          <li>短期払い（例：60歳払済）：払い終えた後は保障だけが続く</li>
+        </ul>
+      </li>
+      <li><strong>低解約返戻金型</strong>：払込期間中の返戻金を抑えた分、保険料が割安</li>
+    </ul>
+    <div class="box-b">📌 当社貯蓄型の主軸は変額保険。終身保険の構造を理解した上で変額を学ぶ</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>養老保険</h2>
+  <div class="body">
+    <ul>
+      <li>保障期間：期間限定（満期あり）</li>
+      <li>満期金：死亡保険金と同額を満期時に受け取れる</li>
+      <li>3形態で最も保険料が高い（死亡リスク＋貯蓄の両方をカバーするため）</li>
+      <li>向いている人：特定の時期に資金が必要な人（退職時・子どもの進学時など）</li>
+      <li>現在の低金利環境では販売数が減少傾向</li>
+    </ul>
+    <div class="grid g3" style="margin-top:.25rem">
+      <div class="card"><h3>定期保険との違い</h3><p>満期金がある点が異なる</p></div>
+      <div class="card"><h3>終身保険との違い</h3><p>保障期間が有期（満期で終わる）</p></div>
+      <div class="card am"><h3>養老保険のポイント</h3><p>死んでも生きても同額受け取れる</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>定期・終身・養老 ― 3形態の比較</h2>
+  <div class="body">
+    <svg viewBox="0 0 500 74" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.4rem;flex-shrink:0">
+      <text x="73" y="20" font-size="10" fill="#334155" font-weight="700" text-anchor="end">定期保険</text>
+      <rect x="78" y="11" width="160" height="14" rx="4" fill="#94a3b8"/>
+      <text x="158" y="21" font-size="8.5" fill="#fff" text-anchor="middle" font-weight="600">期間限定</text>
+      <line x1="238" y1="9" x2="238" y2="27" stroke="#64748b" stroke-width="1.5"/>
+      <text x="243" y="22" font-size="9" fill="#64748b">保障終了</text>
+      <line x1="0" y1="29" x2="500" y2="29" stroke="#f1f5f9" stroke-width="1"/>
+      <text x="73" y="43" font-size="10" fill="#334155" font-weight="700" text-anchor="end">終身保険</text>
+      <rect x="78" y="34" width="385" height="14" rx="4" fill="#85ccca"/>
+      <text x="270" y="44" font-size="8.5" fill="#fff" text-anchor="middle" font-weight="600">一生涯保障</text>
+      <text x="477" y="47" font-size="16" fill="#2d8a87" font-weight="700">∞</text>
+      <line x1="0" y1="52" x2="500" y2="52" stroke="#f1f5f9" stroke-width="1"/>
+      <text x="73" y="66" font-size="10" fill="#334155" font-weight="700" text-anchor="end">養老保険</text>
+      <rect x="78" y="57" width="220" height="14" rx="4" fill="#f59e0b"/>
+      <text x="188" y="67" font-size="8.5" fill="#fff" text-anchor="middle" font-weight="600">期間限定</text>
+      <line x1="298" y1="55" x2="298" y2="73" stroke="#f59e0b" stroke-width="1.5"/>
+      <rect x="301" y="57" width="46" height="13" rx="3" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="324" y="66.5" font-size="8.5" fill="#92400e" text-anchor="middle" font-weight="600">満期金</text>
+    </svg>
+    <div class="grid g3">
+      <div class="card">
+        <h3>定期保険</h3>
+        <ul>
+          <li>保障期間：期間限定</li>
+          <li>満期金：<strong>なし</strong></li>
+          <li>解約返戻金：原則なし</li>
+          <li>保険料：<strong>最も安い</strong></li>
+          <li>満期後は更新か再加入が必要</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>終身保険</h3>
+        <ul>
+          <li>保障期間：<strong>一生涯</strong></li>
+          <li>満期金：なし（解約返戻金として戻る）</li>
+          <li>解約返戻金：払込ほど増加・長期で元本超え</li>
+          <li>保険料：中程度</li>
+          <li>活用：葬儀費・相続対策・資産形成</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>養老保険</h3>
+        <ul>
+          <li>保障期間：期間限定（満期あり）</li>
+          <li>満期金：<strong>死亡保険金と同額</strong></li>
+          <li>解約返戻金：あり</li>
+          <li>保険料：<strong>最も高い</strong></li>
+          <li>活用：特定時期の資金確保</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 「保障重視なら定期、資産形成も兼ねるなら終身、特定時期に資金が必要なら養老」と押さえる</div>
+  </div>
+</div>
+
+<div class="slide s-section">
+  <span class="ch">貯蓄型商品</span>
+  <h2>変額・外貨建て・個人年金・学資</h2>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>変額保険 ― 仕組みと特徴</h2>
+  <div class="body">
+    <svg viewBox="0 0 480 72" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.3rem;flex-shrink:0">
+      <rect x="54" y="10" width="400" height="50" rx="3" fill="#f8fafa"/>
+      <line x1="54" y1="27" x2="454" y2="27" stroke="#e2e8f0" stroke-width="0.5"/>
+      <line x1="54" y1="43" x2="454" y2="43" stroke="#e2e8f0" stroke-width="0.5"/>
+      <line x1="54" y1="60" x2="454" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+      <line x1="54" y1="10" x2="54" y2="60" stroke="#cbd5e1" stroke-width="1"/>
+      <text x="54"  y="70" font-size="7.5" fill="#94a3b8" text-anchor="middle">契約</text>
+      <text x="187" y="70" font-size="7.5" fill="#94a3b8" text-anchor="middle">10年</text>
+      <text x="321" y="70" font-size="7.5" fill="#94a3b8" text-anchor="middle">20年</text>
+      <text x="454" y="70" font-size="7.5" fill="#94a3b8" text-anchor="middle">30年</text>
+      <line x1="54" y1="54" x2="454" y2="54" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <polyline points="54,54 187,46 321,38 454,30" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+      <polygon points="54,54 80,50 108,53 136,45 163,42 190,48 218,36 246,40 273,30 301,34 329,22 358,26 388,16 420,20 454,12 454,60 54,60" fill="#85ccca" fill-opacity="0.15"/>
+      <polyline points="54,54 80,50 108,53 136,45 163,42 190,48 218,36 246,40 273,30 301,34 329,22 358,26 388,16 420,20 454,12" fill="none" stroke="#85ccca" stroke-width="2"/>
+      <line x1="56" y1="6" x2="72" y2="6" stroke="#85ccca" stroke-width="2"/>
+      <text x="74" y="9" font-size="7" fill="#2d8a87">解約返戻金（変動）</text>
+      <line x1="185" y1="6" x2="201" y2="6" stroke="#94a3b8" stroke-width="1.5"/>
+      <text x="203" y="9" font-size="7" fill="#64748b">払込保険料累計</text>
+      <line x1="310" y1="6" x2="326" y2="6" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="328" y="9" font-size="7" fill="#92400e">死亡保険金最低保証</text>
+    </svg>
+    <div class="grid g2">
+      <div class="card">
+        <h3>主な特徴</h3>
+        <ul>
+          <li>運用実績に応じて保険金・解約返戻金が変動する</li>
+          <li>特別勘定での運用（株・債券等のファンドを選択）</li>
+          <li><strong>死亡保険金：最低保証あり</strong>（解約返戻金は元本割れの可能性あり）</li>
+          <li>長期運用を前提とした商品設計</li>
+          <li>積立金額の決め方：余剰資金から逆算する</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>★ 当社貯蓄型の主軸</h3>
+        <ul>
+          <li>資産形成フロントの核心商品</li>
+          <li>老後資金・学資準備に活用</li>
+          <li>iDeCo・NISAとの使い分けが話題になりやすい</li>
+          <li>長期保有で複利効果が期待できる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>変額保険 ― リスクと説明義務</h2>
+  <div class="body">
+    <ul>
+      <li><strong>元本割れリスク</strong>：解約返戻金が払込保険料を下回る可能性がある</li>
+      <li><strong>適合性確認が必須</strong>：年齢・収入・投資経験・リスク許容度を確認する</li>
+      <li><strong>説明義務</strong>：投資性商品として、リスクを丁寧に説明する責任がある</li>
+      <li>「元本保証がないこと」をお客様が理解した上で契約してもらう必要がある</li>
+    </ul>
+    <div class="box-a">⚠️ 近年トラブルが増加。「良いことだけ話して契約させた」は絶対NG。リスク説明は義務</div>
+    <div class="box-b">📌 NISA・iDeCoとの使い分け：保障が必要かどうかが分岐点。保障ありなら変額保険</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>変額保険 ― ファンド選択と運用の仕組み</h2>
+  <div class="body">
+    <svg viewBox="0 0 480 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.35rem;flex-shrink:0">
+      <defs>
+        <marker id="arr-fnd" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <polygon points="0,0 6,3 0,6" fill="#94a3b8"/>
+        </marker>
+      </defs>
+      <!-- Box 1: 保険料 -->
+      <rect x="4" y="23" width="104" height="32" rx="6" fill="#e0f5f5" stroke="#85ccca" stroke-width="1.5"/>
+      <text x="56" y="37" font-size="9.5" fill="#2d8a87" text-anchor="middle" font-weight="700">保険料</text>
+      <text x="56" y="48" font-size="8" fill="#2d8a87" text-anchor="middle">毎月払込</text>
+      <!-- Arrow 1 -->
+      <line x1="108" y1="39" x2="146" y2="39" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-fnd)"/>
+      <!-- Box 2: 特別勘定 -->
+      <rect x="150" y="18" width="132" height="42" rx="6" fill="#85ccca" stroke="#2d8a87" stroke-width="1.5"/>
+      <text x="216" y="34" font-size="9.5" fill="#fff" text-anchor="middle" font-weight="700">特別勘定</text>
+      <text x="216" y="46" font-size="8" fill="#fff" text-anchor="middle">株・債券ファンドで運用</text>
+      <text x="216" y="55" font-size="7.5" fill="#e0f5f5" text-anchor="middle">（スイッチング可能な商品も）</text>
+      <!-- Arrow 2: to 解約返戻金 -->
+      <line x1="282" y1="28" x2="322" y2="19" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-fnd)"/>
+      <!-- Arrow 3: to 死亡保険金 -->
+      <line x1="282" y1="50" x2="322" y2="63" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arr-fnd)"/>
+      <!-- Box 3a: 解約返戻金 -->
+      <rect x="330" y="7" width="146" height="24" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+      <text x="403" y="18" font-size="8.5" fill="#92400e" text-anchor="middle" font-weight="700">解約返戻金（変動）</text>
+      <text x="403" y="27" font-size="7.5" fill="#92400e" text-anchor="middle">▲上昇 / ▼元本割れの可能性</text>
+      <!-- Box 3b: 死亡保険金 -->
+      <rect x="330" y="51" width="146" height="24" rx="5" fill="#d1fae5" stroke="#059669" stroke-width="1.5"/>
+      <text x="403" y="62" font-size="8.5" fill="#059669" text-anchor="middle" font-weight="700">死亡保険金（最低保証★）</text>
+      <text x="403" y="71" font-size="7.5" fill="#059669" text-anchor="middle">払込保険料相当額を保証</text>
+    </svg>
+    <div class="grid g2">
+      <div class="card">
+        <h3>特別勘定のしくみ</h3>
+        <ul>
+          <li>保険料の一部が<strong>特別勘定</strong>（投資信託ファンド）で運用される</li>
+          <li>国内株式型・外国株式型・債券型・バランス型などを選択可能</li>
+          <li>運用実績によって解約返戻金・死亡保険金が増減する</li>
+          <li>ファンドの切り替え（スイッチング）が可能な商品もある</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>リスクと最低保証</h3>
+        <ul>
+          <li>解約返戻金：元本割れの可能性あり（<strong>最低保証なし</strong>）</li>
+          <li>死亡保険金：<strong>最低保証あり</strong>（払込保険料相当額）</li>
+          <li>運用期間が長いほどリスク低減効果あり</li>
+          <li>長期保有を前提とした商品設計（10年・20年・30年）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-a">⚠️ 販売時は元本割れリスクの説明義務あり。適合性確認（年齢・資産・リスク許容度）を必ず実施する。損失が出ても保険会社は補填しない</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>外貨建て保険・一時払い商品</h2>
+  <div class="body">
+    <div class="grid g2">
+      <div class="card">
+        <h3>外貨建て保険</h3>
+        <ul>
+          <li>米ドル・豪ドル建てで運用する貯蓄型保険</li>
+          <li>円建てより高い利率が期待できる</li>
+          <li><strong>為替リスクあり</strong>：円換算での受取額が変動する</li>
+          <li>変額との違い：為替リスク vs 運用リスク</li>
+          <li>リスク説明が特に重要</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>一時払い商品</h3>
+        <ul>
+          <li>保険料を一度にまとめて払い込む</li>
+          <li>まとまった資金がある人・相続対策に活用</li>
+          <li>一時払い終身保険：死亡保険金が相続財産になる</li>
+          <li>一時払い変額保険・一時払い外貨建ても存在する</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>外貨建て保険 ― 為替リスクの具体例</h2>
+  <div class="body">
+    <svg viewBox="0 0 340 74" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;margin-bottom:.35rem;flex-shrink:0">
+      <line x1="50" y1="63" x2="318" y2="63" stroke="#e2e8f0" stroke-width="1"/>
+      <text x="47" y="35" font-size="7" fill="#94a3b8" text-anchor="end">900万</text>
+      <text x="47" y="28" font-size="7" fill="#94a3b8" text-anchor="end">1,100万</text>
+      <text x="47" y="15" font-size="7" fill="#94a3b8" text-anchor="end">1,500万</text>
+      <rect x="56" y="33" width="65" height="30" rx="3" fill="#f59e0b"/>
+      <text x="88" y="43" font-size="9" fill="#fff" text-anchor="middle" font-weight="600">¥90/$</text>
+      <text x="88" y="54" font-size="8.5" fill="#fff" text-anchor="middle">900万円</text>
+      <text x="88" y="70" font-size="7.5" fill="#92400e" text-anchor="middle">円高（不利）</text>
+      <rect x="148" y="26" width="65" height="37" rx="3" fill="#94a3b8"/>
+      <text x="180" y="38" font-size="9" fill="#fff" text-anchor="middle" font-weight="600">¥110/$</text>
+      <text x="180" y="51" font-size="8.5" fill="#fff" text-anchor="middle">1,100万円</text>
+      <text x="180" y="70" font-size="7.5" fill="#64748b" text-anchor="middle">（参考水準）</text>
+      <rect x="240" y="13" width="65" height="50" rx="3" fill="#85ccca"/>
+      <text x="272" y="30" font-size="9" fill="#fff" text-anchor="middle" font-weight="600">¥150/$</text>
+      <text x="272" y="47" font-size="8.5" fill="#fff" text-anchor="middle">1,500万円</text>
+      <text x="272" y="70" font-size="7.5" fill="#2d8a87" text-anchor="middle">円安（有利）</text>
+    </svg>
+    <div class="grid g2">
+      <div class="card ac">
+        <h3>円安時（有利な例）</h3>
+        <ul>
+          <li>契約時：1ドル＝110円</li>
+          <li>受取時：1ドル＝150円（円安）</li>
+          <li>保険金10万ドルなら</li>
+          <li>1,100万円 → <strong>1,500万円</strong>（400万円増）</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>円高時（不利な例）</h3>
+        <ul>
+          <li>契約時：1ドル＝150円</li>
+          <li>受取時：1ドル＝110円（円高）</li>
+          <li>保険金10万ドルなら</li>
+          <li>1,500万円 → <strong>1,100万円</strong>（400万円減）</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-a">💡 変額保険は「運用リスク（ファンドの上下）」、外貨建ては「為替リスク（円換算時の上下）」。リスクの性質が異なる点をお客様に明確に説明する。なお為替手数料（TTB/TTS）も発生するため、実際の手取りはさらに変動する点も補足する</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>個人年金保険</h2>
+  <div class="body">
+    <ul>
+      <li>積立期間に保険料を払い込み、老後に年金として受け取る</li>
+      <li><strong>確定年金</strong>：受取期間が決まっている（10年・15年等）</li>
+      <li><strong>終身年金</strong>：一生涯受け取れる（長生きリスクに最も有効）</li>
+      <li><strong>有期年金</strong>：生存中のみ受け取れる</li>
+      <li>個人年金保険料控除：生命保険料控除とは別枠で控除が受けられる</li>
+    </ul>
+    <div class="box-b">📌 NISA・iDeCoとの使い分け<br>NISA：運用益非課税・途中引き出し可・保障なし<br>iDeCo：節税効果大・60歳まで引き出し不可・保障なし<br>個人年金：保障あり・控除あり・長期運用向き</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>個人年金 vs NISA vs iDeCo ― 使い分けの軸</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card">
+        <h3>個人年金保険</h3>
+        <ul>
+          <li>保障あり（死亡時に払込保険料相当額）</li>
+          <li>専用の税制優遇（個人年金保険料控除）</li>
+          <li>途中解約は元本割れリスク</li>
+          <li>向いている人：保障と貯蓄を一体化したい人</li>
+        </ul>
+      </div>
+      <div class="card ac">
+        <h3>NISA</h3>
+        <ul>
+          <li>運用益・配当が非課税</li>
+          <li>いつでも引き出せる（流動性高）</li>
+          <li>保障なし</li>
+          <li>向いている人：中長期で増やしたい・引き出し自由を重視する人</li>
+        </ul>
+      </div>
+      <div class="card am">
+        <h3>iDeCo</h3>
+        <ul>
+          <li>掛け金全額が所得控除（節税効果大）</li>
+          <li>60歳まで引き出し不可</li>
+          <li>保障なし</li>
+          <li>向いている人：節税しながら老後資金を積み立てたい会社員</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box-b">📌 3つは競合ではなく補完関係。「保障が必要なら保険」「流動性が必要ならNISA」「節税したいならiDeCo」と整理してお客様に提案する</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>学資保険</h2>
+  <div class="body">
+    <ul>
+      <li>子どもの教育費を計画的に積み立てる</li>
+      <li><strong>最大の特徴</strong>：契約者（親）が死亡しても払込免除・積立は継続される</li>
+      <li>祝い金型：進学タイミングごとに受け取れる（小学・中学・高校・大学）</li>
+      <li>満期一括型：特定のタイミングにまとめて受け取る</li>
+      <li>大学4年間の費用の目安：400〜600万円</li>
+    </ul>
+    <div class="grid g2" style="margin-top:.25rem">
+      <div class="card"><h3>変額保険で学資準備するケースとの比較</h3><ul><li>学資保険：元本確保型・計画的</li><li>変額保険：運用次第だが増える可能性あり</li></ul></div>
+      <div class="card ac"><h3>提案のポイント</h3><ul><li>「親が死んでも積立が続く」安心感が大きい</li><li>30代子育て世代に響く</li></ul></div>
+    </div>
+    <div class="box-g">🌱 学資保険の払戻率は商品によって異なるが105〜110%前後のものが多い。低金利時代でも元本確保＋保障が確実に得られる点が強み</div>
+  </div>
+</div>
+
+<div class="slide s-content">
+  <div class="bar"></div>
+  <h2>第2回 まとめ</h2>
+  <div class="body">
+    <div class="goal-list">
+      <div class="goal"><div class="gn">1</div><p>3形態の軸：「定期（掛け捨て）・終身（一生保障＋貯蓄）・養老（貯蓄＋満期金）は全商品の基本構造」</p></div>
+      <div class="goal"><div class="gn">2</div><p>変額保険：「当社の2軸の1つ。運用実績で変動するが死亡保険金は最低保証。適合性確認が必須」</p></div>
+      <div class="goal"><div class="gn">3</div><p>外貨建て・個人年金：「円建てより高い運用期待だが為替リスクあり。NISA・iDeCoとの使い分けがポイント」</p></div>
+      <div class="goal"><div class="gn">4</div><p>学資保険：「親の死亡時に払込免除で積立継続が最大の差別化。教育費の計画的な準備に有効」</p></div>
+    </div>
+    <div class="box-b">📌 次回（第3回）は第三分野（医療・がん・就業不能）と死亡保障（収入保障・定期保険）を扱います</div>
+  </div>
+</div>
+
+<div class="slide s-qa">
+  <h2>Q &amp; A</h2>
+  <p>疑問点・確認したい商品知識を自由に質問してください</p>
+</div>
+
+</div>
+<nav class="nav">
+  <button class="btn" id="prev" disabled>‹</button>
+  <span class="cnt" id="c"></span>
+  <button class="btn" id="next">›</button>
+  <button class="edit-btn" id="editBtn">編集</button>
+  <button class="save-btn" id="saveBtn">HTMLを保存</button>
+</nav>
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0,total=slides.length;
+function go(n){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(n,total-1));slides[cur].classList.add('active');document.getElementById('c').textContent=`${cur+1} / ${total}`;document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===total-1;}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+go(0);
+
+let editMode=false;
+const editBtn=document.getElementById('editBtn');
+const saveBtn=document.getElementById('saveBtn');
+const SELS='h1,h2,h3,p,.badge,.ch,.box-a,.box-b,.box-g';
+
+function toggleEdit(){
+  editMode=!editMode;
+  document.querySelectorAll(SELS).forEach(el=>{el.contentEditable=editMode?'true':'false';});
+  editBtn.textContent=editMode?'編集終了':'編集';
+  editBtn.classList.toggle('on',editMode);
+  saveBtn.style.display=editMode?'inline-block':'none';
+}
+
+function saveHTML(){
+  document.querySelectorAll(SELS).forEach(el=>el.removeAttribute('contenteditable'));
+  editMode=false;
+  editBtn.textContent='編集';
+  editBtn.classList.remove('on');
+  saveBtn.style.display='none';
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=document.title+'.html';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+editBtn.onclick=toggleEdit;
+saveBtn.onclick=saveHTML;
+</script>
+</body>
+</html>
