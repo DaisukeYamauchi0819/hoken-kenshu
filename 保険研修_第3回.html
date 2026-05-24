@@ -82,13 +82,7 @@ li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin
 .btn:disabled{opacity:.3;cursor:not-allowed}
 .cnt{color:var(--bd);font-size:.82rem;min-width:3.5rem;text-align:center}
 
-/* Edit mode */
-.edit-btn{padding:.38rem .95rem;background:rgba(133,204,202,.15);border:1.5px solid var(--brand);color:var(--bd);border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:inherit}
-.edit-btn:hover{background:rgba(133,204,202,.28)}
-.edit-btn.on{background:var(--brand);color:#fff}
-.save-btn{padding:.38rem .95rem;background:var(--bdd);border:none;color:#fff;border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;display:none}
-.save-btn:hover{background:var(--bd)}
-[contenteditable="true"]{outline:1.5px dashed var(--brand) !important;border-radius:3px;min-height:1em}
+
 </style>
 </head>
 <body>
@@ -495,8 +489,6 @@ function checkPw(){
   <button class="btn" id="prev" disabled>‹</button>
   <span class="cnt" id="c"></span>
   <button class="btn" id="next">›</button>
-  <button class="edit-btn" id="editBtn">編集</button>
-  <button class="save-btn" id="saveBtn">HTMLを保存</button>
 </nav>
 <script>
 const slides=document.querySelectorAll('.slide');
@@ -507,36 +499,6 @@ document.getElementById('next').onclick=()=>go(cur+1);
 document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
 go(0);
 
-let editMode=false;
-const editBtn=document.getElementById('editBtn');
-const saveBtn=document.getElementById('saveBtn');
-const SELS='h1,h2,h3,p,.badge,.ch,.box-a,.box-b,.box-g';
-
-function toggleEdit(){
-  editMode=!editMode;
-  document.querySelectorAll(SELS).forEach(el=>{el.contentEditable=editMode?'true':'false';});
-  editBtn.textContent=editMode?'編集終了':'編集';
-  editBtn.classList.toggle('on',editMode);
-  saveBtn.style.display=editMode?'inline-block':'none';
-}
-
-function saveHTML(){
-  document.querySelectorAll(SELS).forEach(el=>el.removeAttribute('contenteditable'));
-  editMode=false;
-  editBtn.textContent='編集';
-  editBtn.classList.remove('on');
-  saveBtn.style.display='none';
-  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
-  const blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download=document.title+'.html';
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-}
-
-editBtn.onclick=toggleEdit;
-saveBtn.onclick=saveHTML;
 </script>
 </body>
 </html>
