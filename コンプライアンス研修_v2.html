@@ -10,7 +10,6 @@
   --brand:#85ccca;--bd:#2d8a87;--bdd:#1a5e5c;--bl:#e0f5f5;--bll:#f0fafa;
   --amber:#f59e0b;--al:#fef3c7;
   --green:#059669;--gl:#d1fae5;
-  --red:#ef4444;--rl:#fef2f2;
   --text:#0f172a;--text-2:#334155;--muted:#64748b;
   --bg:#fff;--surface:#f8fafa;--border:#d4eeee;
 }
@@ -58,12 +57,10 @@ li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin
 .card.ac{border-color:var(--brand);background:var(--bll)}.card.ac h3{color:var(--bd)}
 .card.am{border-color:var(--amber);background:var(--al)}.card.am h3{color:#92400e}
 .card.gr{border-color:var(--green);background:var(--gl)}.card.gr h3{color:var(--green)}
-.card.rd{border-color:var(--red);background:var(--rl)}.card.rd h3{color:#dc2626}
 
 .box-a{background:var(--al);border-left:4px solid var(--amber);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
 .box-b{background:var(--bll);border-left:4px solid var(--brand);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
 .box-g{background:var(--gl);border-left:4px solid var(--green);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
-.box-r{background:var(--rl);border-left:4px solid var(--red);padding:.7rem 1rem;border-radius:0 8px 8px 0;font-size:clamp(.86rem,1.38vw,1rem);color:var(--text)}
 
 /* obj */
 .goal-list{display:flex;flex-direction:column;gap:.6rem}
@@ -107,10 +104,6 @@ li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin
 .take-box{background:var(--bdd);border-radius:12px;padding:1.1rem 1.4rem;flex:1;display:flex;flex-direction:column;gap:.52rem;justify-content:center}
 .take-item{display:flex;align-items:flex-start;gap:.68rem;color:#fff;font-size:clamp(.88rem,1.4vw,1.06rem);line-height:1.55}
 .take-n{min-width:1.55rem;height:1.55rem;background:rgba(133,204,202,.22);border:1.5px solid var(--brand);color:var(--brand);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.76rem;flex-shrink:0;margin-top:.16rem}
-
-/* quiz */
-.qi{display:grid;grid-template-columns:1fr auto;gap:.4rem;align-items:center;padding:.44rem .78rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:clamp(.78rem,1.22vw,.9rem);line-height:1.5}
-.qi .ans{font-weight:700;white-space:nowrap}.ok{color:var(--green)}.ng{color:var(--red)}
 
 /* qa */
 .s-qa{background:var(--bl);justify-content:center;align-items:center;gap:1rem;text-align:center;border-left:6px solid var(--brand)}
@@ -157,7 +150,7 @@ function checkPw(){
 
 <div class="deck">
 
-<!-- S01 cover -->
+<!-- cover -->
 <div class="slide s-title active">
   <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-title" alt="Unicara">
   <span class="badge">新入社員研修 ｜ コンプライアンス ｜ 全1回</span>
@@ -165,7 +158,7 @@ function checkPw(){
   <p class="meta">Unicara　2026年5月　｜　対象：新入社員RS（募集人登録済み）　｜　所要時間：65分</p>
 </div>
 
-<!-- S02 pain：コンプラ違反で何が起きるか -->
+<!-- pain：コンプラ違反で何が起きるか -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -177,11 +170,11 @@ function checkPw(){
       <div class="quote">「意向確認書を後で送ればいいと思っていたら、苦情から行政調査に発展した」<span class="src">— 意向把握手続き未実施のケース</span></div>
       <div class="quote">「顧客情報を個人LINEで送ったことが発覚し、個人情報漏洩として会社全体が処分を受けた」<span class="src">— SNS・ツール管理ミスのケース</span></div>
     </div>
-    <div class="box-r">⚠️ 違反原因1位：禁止行為　2位：意向把握未実施　3位：無登録者による募集　―「知らなかった」は通用しない</div>
+    <div class="box-a">⚠️ 違反原因1位：禁止行為　2位：意向把握未実施　3位：無登録者による募集　―「知らなかった」は通用しない</div>
   </div>
 </div>
 
-<!-- S03 obj：学習目標 -->
+<!-- obj：学習目標 -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -197,7 +190,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S04 agenda -->
+<!-- agenda -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -233,14 +226,14 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S05 divider：Module 1 -->
+<!-- divider：Module 1 -->
 <div class="slide s-section">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <span class="ch">Module 1　｜　5〜18分</span>
   <h2>募集人・非募集人で<br>できることの違い</h2>
 </div>
 
-<!-- S06 concept：募集人とは -->
+<!-- concept：募集人とは -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -257,41 +250,41 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S07 concept：無登録者にさせてはいけないこと -->
+<!-- concept：無登録者にさせてはいけないこと -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>無登録者にさせてはいけないこと（保険業法第276条）</h2>
   <div class="body">
     <div class="concept-wrap">
-      <div class="concept-claim">「説明する・勧める・特定商品に誘導する」はすべて募集行為 ＝ 無登録者に依頼してはいけない</div>
+      <div class="concept-claim">「説明する・勧める・特定商品に誘導する」はすべて募集行為 — 無登録者に依頼してはいけない</div>
       <div class="ev-row">
         <div class="ev-card"><h3>❌ 勧誘・説明系</h3><p>移管・乗換えの勧誘／具体的な保険商品の説明／設計書の送付（送るだけでも違反）</p></div>
         <div class="ev-card"><h3>❌ 手続き系</h3><p>申込書・告知書の記入案内／保険料の受け取り</p></div>
-        <div class="ev-card"><h3>✅ OK な範囲</h3><p>一般論の金融教育／面談日程の調整・取次ぎ／資料の物理的受け渡し（説明なし）／事務・書類整理</p></div>
+        <div class="ev-card"><h3>✅ OKな範囲</h3><p>一般論の金融教育／面談日程の調整・取次ぎ／資料の受け渡し（説明なし）／事務・書類整理</p></div>
       </div>
     </div>
-    <div class="box-a">⚠️ 違反時：代理店への業務停止・登録取消し　依頼した募集人も処分対象</div>
+    <div class="box-a">⚠️ 違反時：代理店への業務停止・登録取消し。依頼した募集人も処分対象</div>
   </div>
 </div>
 
-<!-- S08 data：○×クイズ -->
+<!-- cmp：○×クイズ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>○×クイズ — 無登録スタッフへの依頼、OKかNGか（5問）</h2>
   <div class="body">
-    <div style="display:flex;flex-direction:column;gap:.38rem">
-      <div class="qi"><span>Q1. 顧客に「生命保険に興味はありますか？」と聞かせた</span><span class="ans ng">× NG</span></div>
-      <div class="qi"><span>Q2. 「担当者からご説明します」とアポを取らせた</span><span class="ans ok">○ OK</span></div>
-      <div class="qi"><span>Q3. 自分が作成した設計書を顧客にメールで送らせた</span><span class="ans ng">× NG（送付だけでも違反）</span></div>
-      <div class="qi"><span>Q4. 「終身保険ってどんな仕組み？」という質問に一般論を説明させた</span><span class="ans ok">○ OK</span></div>
-      <div class="qi"><span>Q5. 申込書の記入の仕方を案内させた</span><span class="ans ng">× NG</span></div>
+    <div style="display:flex;flex-direction:column;gap:.45rem">
+      <div class="card"><p>Q1. 顧客に「生命保険に興味はありますか？」と聞かせた　→　<strong style="color:#92400e">× NG（勧誘行為）</strong></p></div>
+      <div class="card"><p>Q2. 「担当者からご説明します」とアポを取らせた　→　<strong style="color:var(--green)">○ OK（取次ぎ）</strong></p></div>
+      <div class="card am"><p>Q3. 自分が作成した設計書を顧客にメールで送らせた　→　<strong style="color:#92400e">× NG（送付だけでも違反）</strong></p></div>
+      <div class="card"><p>Q4. 「終身保険ってどんな仕組み？」という質問に一般論を説明させた　→　<strong style="color:var(--green)">○ OK（一般論）</strong></p></div>
+      <div class="card am"><p>Q5. 申込書の記入の仕方を案内させた　→　<strong style="color:#92400e">× NG（手続き案内）</strong></p></div>
     </div>
   </div>
 </div>
 
-<!-- S09 take：Module 1 まとめ -->
+<!-- take：Module 1 まとめ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -299,21 +292,21 @@ function checkPw(){
   <div class="body">
     <div class="take-box">
       <div class="take-item"><div class="take-n">1</div><span>募集人＝試験合格＋登録完了。登録は保険会社ごとに必要で有効期限の自己管理が必須</span></div>
-      <div class="take-item"><div class="take-n">2</div><span>無登録者への依頼がOKなのは「つなぐ・整理する・一般論」のみ。説明・勧誘・手続きはすべてNG</span></div>
+      <div class="take-item"><div class="take-n">2</div><span>無登録者へのOKは「つなぐ・整理する・一般論」のみ。説明・勧誘・手続きはすべてNG</span></div>
       <div class="take-item"><div class="take-n">3</div><span>設計書を「送るだけ」でも違反。依頼した募集人も処分対象になる</span></div>
       <div class="take-item"><div class="take-n">4</div><span>スタッフが増えたとき：「登録完了通知が届くまで募集させない」が鉄則</span></div>
     </div>
   </div>
 </div>
 
-<!-- S10 divider：Module 2 -->
+<!-- divider：Module 2 -->
 <div class="slide s-section">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <span class="ch">Module 2　｜　18〜34分</span>
   <h2>禁止行為9つ</h2>
 </div>
 
-<!-- S11 concept：禁止行為とは -->
+<!-- concept：禁止行為とは -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -330,7 +323,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S12 data：禁止行為①② -->
+<!-- data：禁止行為①② -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -342,8 +335,8 @@ function checkPw(){
         <ul>
           <li>事実と異なることを告げる</li>
           <li>将来不確実なことを確実と断言する</li>
-          <li>NG：変額保険で「元本保証」／更新型なのに「保険料は変わらない」</li>
-          <li>NG：「銀行より絶対有利」「絶対に損しません」</li>
+          <li>NG：変額保険で「元本保証」／「銀行より絶対有利」</li>
+          <li>NG：更新型なのに「保険料は変わらない」</li>
         </ul>
         <p style="margin-top:.4rem;color:var(--bd);font-weight:600;font-size:clamp(.74rem,1.14vw,.86rem)">✔ 不確実なことは「可能性があります」と表現する</p>
       </div>
@@ -361,7 +354,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S13 data：禁止行為③④⑤ -->
+<!-- data：禁止行為③④⑤ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -397,7 +390,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S14 data：禁止行為⑥⑦⑧⑨ -->
+<!-- data：禁止行為⑥⑦⑧⑨ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -436,7 +429,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S15 take：Module 2 まとめ -->
+<!-- take：Module 2 まとめ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -447,19 +440,19 @@ function checkPw(){
       <div class="take-item"><div class="take-n">③④</div><span>根拠のない比較・強調　／　不利益説明なしの乗換え勧誘</span></div>
       <div class="take-item"><div class="take-n">⑤⑥</div><span>告知義務違反の唆し　／　特別利益の提供（好意・自腹も違反）</span></div>
       <div class="take-item"><div class="take-n">⑦⑧</div><span>威迫・地位の不当利用　／　誹謗・中傷（記事コピーも対象）</span></div>
-      <div class="take-item"><div class="take-n">⑨</div><span>保険種類・引受保険会社の誤認を招く行為　―　引受保険会社は必ず正確に伝える</span></div>
+      <div class="take-item"><div class="take-n">⑨</div><span>保険種類・引受保険会社の誤認 — 引受保険会社は必ず正確に伝える</span></div>
     </div>
   </div>
 </div>
 
-<!-- S16 divider：Module 3 -->
+<!-- divider：Module 3 -->
 <div class="slide s-section">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <span class="ch">Module 3　｜　34〜46分</span>
   <h2>意向把握・情報提供義務</h2>
 </div>
 
-<!-- S17 concept：意向把握義務とは -->
+<!-- concept：意向把握義務とは -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -468,7 +461,7 @@ function checkPw(){
     <div class="concept-wrap">
       <div class="concept-claim">顧客が本当に必要とするものと異なる保険を売ることを防ぐための義務<br><span style="font-size:.8em;font-weight:500;opacity:.85">先に商品を決めてから話を合わせるのはNG</span></div>
       <div class="ev-row">
-        <div class="ev-card"><h3>義務の背景</h3><p>意向把握未実施は行政処分原因の2位。「手続き」ではなく「顧客のための会話」として捉える</p></div>
+        <div class="ev-card"><h3>義務の背景</h3><p>意向把握未実施は行政処分原因の2位。「手続き」ではなく「顧客のための会話」</p></div>
         <div class="ev-card"><h3>未実施の結果</h3><p>行政処分・苦情・損害賠償の原因になる。書面交付漏れも重大違反として扱われる</p></div>
         <div class="ev-card"><h3>乗合代理店の追加義務</h3><p>複数商品を比較し、推奨理由を明確に記録する義務がある（第294条）</p></div>
       </div>
@@ -476,38 +469,23 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S18 process：意向把握5ステップ -->
+<!-- process：意向把握5ステップ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>意向把握の5ステップ</h2>
   <div class="body">
     <div class="step-flow">
-      <div class="step">
-        <div class="sn">1</div>
-        <div class="sb key"><h3>意向把握</h3><p>加入目的・予算・家族構成・既契約をヒアリング・記録。ここが必ず最初</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">2</div>
-        <div class="sb"><h3>商品選定</h3><p>複数商品を比較。乗合代理店は推奨理由を明確に記録する義務あり</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">3</div>
-        <div class="sb"><h3>商品説明</h3><p>保障内容・免責・解約控除・リスクを正確に説明。書面交付漏れは重大違反</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">4</div>
-        <div class="sb key"><h3>意向確認</h3><p>意向と契約内容の整合性を最終確認。意向確認書に署名。後日郵送はNG（説明と同時交付が原則）</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">5</div>
-        <div class="sb"><h3>契約締結</h3><p>申込書記入・告知適正取得・クーリングオフ案内</p></div>
-      </div>
+      <div class="step"><div class="sn">1</div><div class="sb key"><h3>意向把握</h3><p>加入目的・予算・家族構成・既契約をヒアリング・記録。ここが必ず最初</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="sb"><h3>商品選定</h3><p>複数商品を比較。乗合代理店は推奨理由を明確に記録する義務あり</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="sb"><h3>商品説明</h3><p>保障内容・免責・解約控除・リスクを正確に説明。書面交付漏れは重大違反</p></div></div>
+      <div class="step"><div class="sn">4</div><div class="sb key"><h3>意向確認</h3><p>意向と契約内容の整合性を最終確認。意向確認書に署名。後日郵送はNG（説明と同時交付が原則）</p></div></div>
+      <div class="step"><div class="sn">5</div><div class="sb"><h3>契約締結</h3><p>申込書記入・告知適正取得・クーリングオフ案内</p></div></div>
     </div>
   </div>
 </div>
 
-<!-- S19 data：情報提供義務 -->
+<!-- data：情報提供義務 -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -516,41 +494,32 @@ function checkPw(){
     <div class="grid g3">
       <div class="card ac">
         <h3>① 契約概要</h3>
-        <ul>
-          <li>保障内容・保険料</li>
-          <li>解約返戻金等</li>
-        </ul>
+        <ul><li>保障内容・保険料</li><li>解約返戻金等</li></ul>
       </div>
       <div class="card am">
         <h3>② 注意喚起情報</h3>
-        <ul>
-          <li>告知義務・クーリングオフ</li>
-          <li>免責事項等</li>
-        </ul>
+        <ul><li>告知義務・クーリングオフ</li><li>免責事項等</li></ul>
       </div>
       <div class="card">
         <h3>③ 推奨理由</h3>
-        <ul>
-          <li>複数商品を取扱う場合</li>
-          <li>なぜその商品を推奨したか</li>
-        </ul>
+        <ul><li>複数商品を取扱う場合</li><li>なぜその商品を推奨したか</li></ul>
       </div>
     </div>
     <div class="grid g2">
       <div class="box-b">📌 渡すだけでなく「説明した」記録が必要</div>
-      <div class="box-r">⚠️ 書面・電子どちらでも交付漏れは重大違反</div>
+      <div class="box-a">⚠️ 書面・電子どちらでも交付漏れは重大違反</div>
     </div>
   </div>
 </div>
 
-<!-- S20 pain：やってしまいがちなNG例 -->
+<!-- pain：やってしまいがちなNG例 -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>やってしまいがちなNG例</h2>
   <div class="body">
     <div class="pain-list">
-      <div class="quote">「良いところだけ説明して申込みをもらった。注意喚起情報の説明が必要だとは思わなかった」<span class="src">— NG①：注意喚起情報（クーリングオフ・免責等）の説明が必須</span></div>
+      <div class="quote">「良いところだけ説明して申込みをもらった。注意喚起情報の説明が必要だとは思わなかった」<span class="src">— NG①：クーリングオフ・免責等の注意喚起情報の説明が必須</span></div>
       <div class="quote">「とりあえず申込書だけ書いてもらってから、後で意向を確認しようとしていた」<span class="src">— NG②：意向把握は申込みの前が必須。STEP 1が必ず先</span></div>
       <div class="quote">「意向確認書は後日郵送すればいいと思っていた。まさか行政調査になるとは」<span class="src">— NG③：意向確認書は説明と同時交付が原則</span></div>
       <div class="quote">「話を聞く前にこの商品がおすすめと伝えてしまった」<span class="src">— NG④：意向を聞かずに商品を先に決めることは意向把握義務違反</span></div>
@@ -558,7 +527,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S21 take：Module 3 まとめ -->
+<!-- take：Module 3 まとめ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -573,14 +542,14 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S22 divider：Module 4 -->
+<!-- divider：Module 4 -->
 <div class="slide s-section">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <span class="ch">Module 4　｜　46〜57分</span>
   <h2>個人情報保護の実務ルール</h2>
 </div>
 
-<!-- S23 concept：個人情報の特殊性 -->
+<!-- concept：個人情報の特殊性 -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -597,7 +566,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S24 data：日常業務での個人情報ルール -->
+<!-- data：日常業務での個人情報ルール -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -632,7 +601,7 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S25 cmp：LINEとSNSの取り扱い -->
+<!-- cmp：LINEとSNSの取り扱い -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -647,7 +616,7 @@ function checkPw(){
           <li>申込書の写真送受信NG</li>
         </ul>
       </div>
-      <div class="card rd">
+      <div class="card am">
         <h3>📱 SNS</h3>
         <ul>
           <li>顧客名・情報の投稿NG（仮名も不可）</li>
@@ -656,39 +625,27 @@ function checkPw(){
         </ul>
       </div>
     </div>
-    <div class="box-r">⚠️ 「仮名だから大丈夫」「鍵垢だから大丈夫」は通用しない。個人情報漏洩として処分対象</div>
+    <div class="box-a">⚠️ 「仮名だから大丈夫」「鍵垢だから大丈夫」は通用しない。個人情報漏洩として処分対象</div>
   </div>
 </div>
 
-<!-- S26 process：情報漏洩が起きたら -->
+<!-- process：情報漏洩が起きたら -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>情報漏洩が起きたら</h2>
   <div class="body">
     <div class="step-flow">
-      <div class="step">
-        <div class="sn">1</div>
-        <div class="sb warn"><h3>すぐに上長・内部管理責任者に報告</h3><p>発覚したその場で。自己判断で様子を見ない</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">2</div>
-        <div class="sb"><h3>状況を記録</h3><p>いつ・何が・どのように漏洩したかを記録する</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">3</div>
-        <div class="sb"><h3>被害を広げない行動</h3><p>デバイス隔離等、二次漏洩を防ぐ措置をとる</p></div>
-      </div>
-      <div class="step">
-        <div class="sn">4</div>
-        <div class="sb"><h3>会社の指示に従って対応</h3><p>独断で顧客に連絡するなどの行動はしない</p></div>
-      </div>
+      <div class="step"><div class="sn">1</div><div class="sb warn"><h3>すぐに上長・内部管理責任者に報告</h3><p>発覚したその場で。自己判断で様子を見ない</p></div></div>
+      <div class="step"><div class="sn">2</div><div class="sb"><h3>状況を記録</h3><p>いつ・何が・どのように漏洩したかを記録する</p></div></div>
+      <div class="step"><div class="sn">3</div><div class="sb"><h3>被害を広げない行動</h3><p>デバイス隔離等、二次漏洩を防ぐ措置をとる</p></div></div>
+      <div class="step"><div class="sn">4</div><div class="sb"><h3>会社の指示に従って対応</h3><p>独断で顧客に連絡するなどの行動はしない</p></div></div>
     </div>
-    <div class="box-r">⚠️ 自分で「大丈夫だろう」と判断して隠すことが最悪の対応。隠蔽は処分を大幅に重くする</div>
+    <div class="box-a">⚠️ 自分で「大丈夫だろう」と判断して隠すことが最悪の対応。隠蔽は処分を大幅に重くする</div>
   </div>
 </div>
 
-<!-- S27 take：Module 4 まとめ -->
+<!-- take：Module 4 まとめ -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
@@ -703,46 +660,46 @@ function checkPw(){
   </div>
 </div>
 
-<!-- S28 divider：確認テスト -->
+<!-- divider：確認テスト -->
 <div class="slide s-section">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <span class="ch">確認テスト　｜　57〜65分</span>
   <h2>10問　合格ライン：80点（8問以上正解）</h2>
 </div>
 
-<!-- S29 data：問1〜5 -->
+<!-- data：問1〜5 -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>確認テスト ○× 問1〜5</h2>
   <div class="body">
-    <div style="display:flex;flex-direction:column;gap:.4rem">
-      <div class="qi"><span>問1. 登録手続き中のスタッフに保険の説明をさせても問題ない</span><span class="ans ng">× NG</span></div>
-      <div class="qi"><span>問2. 非募集人スタッフがSNSで「今日顧客と面談した」と投稿した</span><span class="ans ng">× NG</span></div>
-      <div class="qi"><span>問3. 不利益を十分説明したうえで、顧客が納得して乗換えを選択した</span><span class="ans ok">○ OK</span></div>
-      <div class="qi"><span>問4. 顧客から「持病は書かないでいい？」と言われ「そうですね」と答えた</span><span class="ans ng">× NG（告知義務違反の唆し）</span></div>
-      <div class="qi"><span>問5. 契約のお礼に顧客を食事に招待した（費用は自腹）</span><span class="ans ng">× NG（特別利益の提供）</span></div>
+    <div style="display:flex;flex-direction:column;gap:.44rem">
+      <div class="card"><p>問1. 登録手続き中のスタッフに保険の説明をさせても問題ない　→　<strong style="color:#92400e">× NG</strong></p></div>
+      <div class="card"><p>問2. 非募集人スタッフがSNSで「今日顧客と面談した」と投稿した　→　<strong style="color:#92400e">× NG</strong></p></div>
+      <div class="card"><p>問3. 不利益を十分説明したうえで、顧客が納得して乗換えを選択した　→　<strong style="color:var(--green)">○ OK</strong></p></div>
+      <div class="card am"><p>問4. 顧客から「持病は書かないでいい？」と言われ「そうですね」と答えた　→　<strong style="color:#92400e">× NG（告知義務違反の唆し）</strong></p></div>
+      <div class="card am"><p>問5. 契約のお礼に顧客を食事に招待した（費用は自腹）　→　<strong style="color:#92400e">× NG（特別利益の提供）</strong></p></div>
     </div>
   </div>
 </div>
 
-<!-- S30 data：問6〜10 -->
+<!-- data：問6〜10 -->
 <div class="slide s-content">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <div class="bar"></div>
   <h2>確認テスト 問6〜10</h2>
   <div class="body">
-    <div style="display:flex;flex-direction:column;gap:.4rem">
-      <div class="qi"><span>問6. 意向確認（STEP 4）は商品説明の前に実施する</span><span class="ans ng">× NG（STEP 4は商品説明の後）</span></div>
-      <div class="qi"><span>問7. 要配慮個人情報は顧客の同意なく第三者に提供できる</span><span class="ans ng">× NG（原則禁止）</span></div>
-      <div class="qi"><span>問8. 非募集人が商品内容について聞かれた。正しい対応は？　A.一般論を説明　B.募集人に取り次ぐ　C.資料を渡す</span><span class="ans ok">B</span></div>
-      <div class="qi"><span>問9. 意向確認書の取得タイミングは5ステップ中いつか</span><span class="ans ok">STEP 4（意向確認）</span></div>
-      <div class="qi"><span>問10. 情報漏洩が発覚したとき、最初にすべき行動は</span><span class="ans ok">上長・内部管理責任者に報告</span></div>
+    <div style="display:flex;flex-direction:column;gap:.44rem">
+      <div class="card am"><p>問6. 意向確認（STEP 4）は商品説明の前に実施する　→　<strong style="color:#92400e">× NG（STEP 4は商品説明の後）</strong></p></div>
+      <div class="card am"><p>問7. 要配慮個人情報は顧客の同意なく第三者に提供できる　→　<strong style="color:#92400e">× NG（原則禁止）</strong></p></div>
+      <div class="card"><p>問8. 非募集人が商品内容について聞かれた。正しい対応は？　A.一般論を説明　B.募集人に取り次ぐ　C.資料を渡す　→　<strong style="color:var(--green)">B</strong></p></div>
+      <div class="card"><p>問9. 意向確認書の取得タイミングは5ステップ中いつか　→　<strong style="color:var(--green)">STEP 4（意向確認）</strong></p></div>
+      <div class="card"><p>問10. 情報漏洩が発覚したとき、最初にすべき行動は　→　<strong style="color:var(--green)">上長・内部管理責任者に報告</strong></p></div>
     </div>
   </div>
 </div>
 
-<!-- S31 qa -->
+<!-- qa -->
 <div class="slide s-qa">
   <img class="logo-mk" src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" alt="">
   <h2>Q &amp; A</h2>
@@ -778,7 +735,7 @@ let editing=false;
 function toggleEdit(){
   editing=!editing;
   document.querySelectorAll('.slide *').forEach(el=>{
-    if(el.children.length===0&&el.textContent.trim()&&!el.closest('.logo-mk')&&!el.closest('.logo-title'))
+    if(el.children.length===0&&el.textContent.trim()&&!el.closest('img'))
       el.contentEditable=editing?'true':'false';
   });
   document.getElementById('editBtn').textContent=editing?'編集中':'編集';
