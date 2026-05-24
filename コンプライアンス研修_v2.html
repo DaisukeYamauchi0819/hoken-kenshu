@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>新入社員コンプライアンス研修</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--brand:#85ccca;--bd:#2d8a87;--bdd:#1a5e5c;--bl:#e0f5f5;--bll:#f0fafa;--amber:#f59e0b;--al:#fef3c7;--green:#059669;--gl:#d1fae5;--red:#ef4444;--rl:#fef2f2;--text:#0f172a;--text-2:#334155;--muted:#64748b;--bg:#fff;--surface:#f8fafa;--border:#d4eeee}
+body{font-family:system-ui,-apple-system,'Hiragino Sans','Yu Gothic UI',sans-serif;background:#daeeed;height:100vh;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem}
+.deck{width:min(1100px,94vw);aspect-ratio:16/9;position:relative;box-shadow:0 8px 32px rgba(0,0,0,.18);border-radius:14px;border:2.5px solid var(--brand);overflow:hidden}
+.slide{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;flex-direction:column}
+.slide.active{opacity:1;pointer-events:all}
+strong{font-weight:700}
+/* Cover */
+.s-cover{background:var(--bdd);justify-content:center;align-items:flex-start;padding:3rem 3.5rem;gap:.9rem;position:relative;overflow:hidden}
+.s-cover::before{content:'';position:absolute;right:-4rem;top:-4rem;width:22rem;height:22rem;border-radius:50%;background:rgba(133,204,202,.1)}
+.s-cover::after{content:'';position:absolute;right:1rem;bottom:-6rem;width:16rem;height:16rem;border-radius:50%;background:rgba(133,204,202,.06)}
+.cover-tag{background:rgba(133,204,202,.18);color:var(--brand);padding:.28rem .95rem;border-radius:99px;font-size:clamp(.7rem,1.08vw,.84rem);letter-spacing:.08em;border:1px solid rgba(133,204,202,.35);width:fit-content}
+.s-cover h1{color:#fff;font-size:clamp(1.5rem,3vw,2.5rem);font-weight:700;line-height:1.3;max-width:70%}
+.s-cover .meta{color:rgba(133,204,202,.75);font-size:clamp(.78rem,1.22vw,.93rem)}
+.logo-cover{position:absolute;bottom:1.2rem;right:1.5rem;height:clamp(20px,2.4vw,32px);opacity:.5}
+/* Divider */
+.s-div{background:var(--bdd);justify-content:flex-end;padding:2.5rem 3rem;gap:.35rem;position:relative;overflow:hidden}
+.div-bg{position:absolute;right:1.5rem;top:50%;transform:translateY(-58%);font-size:clamp(6rem,13vw,10rem);font-weight:900;color:rgba(133,204,202,.1);line-height:1;letter-spacing:-.04em;pointer-events:none;user-select:none}
+.div-chip{background:rgba(133,204,202,.16);color:var(--brand);padding:.26rem .88rem;border-radius:99px;font-size:clamp(.66rem,1.02vw,.8rem);letter-spacing:.08em;border:1px solid rgba(133,204,202,.28);width:fit-content;margin-bottom:.15rem}
+.s-div h2{color:#fff;font-size:clamp(1.55rem,2.9vw,2.35rem);font-weight:700;line-height:1.3}
+.div-sub{color:rgba(133,204,202,.7);font-size:clamp(.8rem,1.28vw,.96rem)}
+/* Content base */
+.s-content{padding:1.35rem 2.4rem 1.45rem;flex:1;display:flex;flex-direction:column;gap:.7rem}
+.s-content>h2{color:var(--bdd);font-size:clamp(1.02rem,1.86vw,1.42rem);font-weight:700;padding-bottom:.5rem;border-bottom:2.5px solid var(--brand);flex-shrink:0}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.55rem}
+ul{list-style:none;display:flex;flex-direction:column;gap:.44rem}
+li{display:flex;align-items:flex-start;gap:.5rem;font-size:clamp(.88rem,1.4vw,1.06rem);line-height:1.6;color:var(--text)}
+li::before{content:'▸';color:var(--brand);flex-shrink:0;font-size:.78em;margin-top:.24em}
+.grid{display:grid;gap:.68rem}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.78rem .95rem}
+.card h3{font-size:clamp(.84rem,1.32vw,1.04rem);font-weight:700;color:var(--bdd);margin-bottom:.32rem}
+.card p,.card li{font-size:clamp(.76rem,1.18vw,.9rem);color:var(--text-2);line-height:1.5}
+.card.ac{border-color:var(--brand);background:var(--bll)}.card.ac h3{color:var(--bd)}
+.card.am{border-color:var(--amber);background:var(--al)}.card.am h3{color:#92400e}
+.card.gr{border-color:var(--green);background:var(--gl)}.card.gr h3{color:var(--green)}
+.card.rd{border-color:var(--red);background:var(--rl)}.card.rd h3{color:#dc2626}
+.box-a{background:var(--al);border-left:4px solid var(--amber);padding:.62rem .95rem;border-radius:0 8px 8px 0;font-size:clamp(.83rem,1.32vw,.97rem);color:var(--text)}
+.box-b{background:var(--bll);border-left:4px solid var(--brand);padding:.62rem .95rem;border-radius:0 8px 8px 0;font-size:clamp(.83rem,1.32vw,.97rem);color:var(--text)}
+/* Pain */
+.pain-list{display:flex;flex-direction:column;gap:.48rem}
+.quote{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.6rem 1rem .6rem 1.5rem;position:relative;font-size:clamp(.85rem,1.35vw,1.02rem);color:var(--text-2);line-height:1.55}
+.quote::before{content:'"';position:absolute;left:.4rem;top:.2rem;font-size:2rem;color:var(--brand);line-height:1;font-family:Georgia,serif}
+.quote .src{display:block;font-size:clamp(.68rem,1.04vw,.8rem);color:var(--muted);margin-top:.2rem}
+/* Obj */
+.obj-list{display:flex;flex-direction:column;gap:.52rem}
+.obj-item{display:flex;align-items:center;gap:.85rem;padding:.72rem 1.05rem;background:var(--bll);border-radius:10px;border:1.5px solid var(--border)}
+.obj-n{min-width:1.8rem;height:1.8rem;background:var(--bdd);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0}
+.obj-p{font-size:clamp(.88rem,1.42vw,1.08rem);color:var(--text);line-height:1.5}
+/* Agenda */
+.agenda-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;flex:1;align-items:stretch}
+.a-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.75rem .88rem;display:flex;flex-direction:column;gap:.3rem}
+.a-num{font-size:clamp(.66rem,1.02vw,.78rem);font-weight:700;color:var(--brand);letter-spacing:.06em}
+.a-label{font-size:clamp(.84rem,1.32vw,1.02rem);font-weight:700;color:var(--bdd);line-height:1.3}
+.a-desc{font-size:clamp(.7rem,1.06vw,.82rem);color:var(--text-2);line-height:1.44}
+.a-time{font-size:clamp(.66rem,1.02vw,.78rem);color:var(--muted);margin-top:auto;padding-top:.28rem;border-top:1px solid var(--border)}
+/* Concept */
+.concept-wrap{display:flex;flex-direction:column;gap:.6rem;flex:1;justify-content:center}
+.concept-claim{background:var(--bdd);color:#fff;padding:.9rem 1.3rem;border-radius:10px;font-size:clamp(.93rem,1.62vw,1.25rem);font-weight:700;line-height:1.5;text-align:center}
+.ev-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.58rem}
+.ev-card{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:.6rem .78rem}
+.ev-card h3{font-size:clamp(.8rem,1.24vw,.94rem);font-weight:700;color:var(--bd);margin-bottom:.22rem}
+.ev-card p{font-size:clamp(.7rem,1.06vw,.82rem);color:var(--text-2);line-height:1.42}
+/* Take */
+.take-box{background:var(--bdd);border-radius:12px;padding:1.1rem 1.4rem;flex:1;display:flex;flex-direction:column;gap:.5rem;justify-content:center}
+.take-item{display:flex;align-items:flex-start;gap:.68rem;color:#fff;font-size:clamp(.88rem,1.4vw,1.06rem);line-height:1.55}
+.take-n{min-width:1.55rem;height:1.55rem;background:rgba(133,204,202,.22);border:1.5px solid var(--brand);color:var(--brand);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.76rem;flex-shrink:0;margin-top:.16rem}
+/* Step */
+.step-flow{display:flex;flex-direction:column;gap:.26rem}
+.step{display:grid;grid-template-columns:2rem 1fr;gap:.5rem;align-items:start}
+.sn{width:2rem;height:2rem;background:var(--brand);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0;margin-top:.1rem}
+.sb{background:var(--surface);border:1.5px solid var(--border);border-radius:8px;padding:.36rem .68rem}
+.sb h3{font-size:clamp(.76rem,1.16vw,.88rem);font-weight:700;color:var(--bdd);margin-bottom:.05rem}
+.sb p{font-size:clamp(.66rem,1.02vw,.78rem);color:var(--text-2);line-height:1.38}
+.sb.key{border-color:var(--brand);background:var(--bll)}.sb.key h3{color:var(--bd)}
+.sb.warn{border-color:var(--amber);background:var(--al)}.sb.warn h3{color:#92400e}
+/* Quiz */
+.qi{display:grid;grid-template-columns:1fr auto;gap:.38rem;align-items:center;padding:.4rem .7rem;border-radius:8px;background:var(--surface);border:1.5px solid var(--border);font-size:clamp(.76rem,1.18vw,.88rem)}
+.qi .ans{font-weight:700}.ok{color:var(--green)}.ng{color:var(--red)}
+/* QA / End */
+.s-qa{background:var(--bl);justify-content:center;align-items:center;gap:.9rem;text-align:center;border-left:6px solid var(--brand)}
+.s-qa h2{color:var(--bdd);font-size:clamp(2rem,4vw,3.2rem);font-weight:700}
+.s-qa p{color:var(--bd);font-size:clamp(.88rem,1.42vw,1.08rem)}
+.s-end{background:var(--bdd);justify-content:center;align-items:center;gap:.9rem;text-align:center}
+.s-end h2{color:#fff;font-size:clamp(1.6rem,3.2vw,2.5rem);font-weight:700}
+.s-end p{color:var(--brand);font-size:clamp(.88rem,1.42vw,1.08rem)}
+/* Nav */
+.nav{display:flex;align-items:center;gap:1rem}
+.btn{width:2.4rem;height:2.4rem;background:rgba(133,204,202,.15);border:1.5px solid rgba(133,204,202,.5);color:var(--bd);border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.btn:hover{background:rgba(133,204,202,.3)}.btn:disabled{opacity:.3;cursor:not-allowed}
+.cnt{color:var(--bd);font-size:.82rem;min-width:3.5rem;text-align:center}
+.edit-btn{padding:.36rem .92rem;background:rgba(133,204,202,.15);border:1.5px solid var(--brand);color:var(--bd);border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;transition:all .2s;font-family:inherit}
+.edit-btn:hover{background:rgba(133,204,202,.28)}.edit-btn.on{background:var(--brand);color:#fff}
+.save-btn{padding:.36rem .92rem;background:var(--bdd);border:none;color:#fff;border-radius:99px;cursor:pointer;font-size:.78rem;font-weight:600;font-family:inherit;display:none}
+.save-btn:hover{background:var(--bd)}
+[contenteditable="true"]{outline:1.5px dashed var(--brand) !important;border-radius:3px;min-height:1em}
+</style>
+</head>
+<body>
+<div id="pw-gate" style="position:fixed;inset:0;background:#1a5e5c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;z-index:9999">
+  <p style="color:#e0f5f5;font-size:clamp(1rem,2vw,1.3rem);font-weight:700;letter-spacing:.06em">新入社員コンプライアンス研修</p>
+  <p style="color:#85ccca;font-size:clamp(.82rem,1.4vw,.98rem)">パスワードを入力してください</p>
+  <div style="display:flex;gap:.6rem">
+    <input id="pw-input" type="password" placeholder="password" style="padding:.65rem 1rem;border-radius:8px;border:none;font-size:1rem;outline:none;width:220px;font-family:inherit">
+    <button onclick="checkPw()" style="padding:.65rem 1.3rem;background:#85ccca;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;color:#1a5e5c;font-family:inherit">入室</button>
+  </div>
+  <p id="pw-err" style="color:#fca5a5;font-size:.85rem;min-height:1em"></p>
+</div>
+<script>
+document.getElementById('pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')checkPw()});
+if(sessionStorage.getItem('compliance-auth')==='ok')document.getElementById('pw-gate').style.display='none';
+function checkPw(){if(document.getElementById('pw-input').value==='compliance'){sessionStorage.setItem('compliance-auth','ok');document.getElementById('pw-gate').style.display='none';}else{document.getElementById('pw-err').textContent='パスワードが違います';document.getElementById('pw-input').value='';document.getElementById('pw-input').focus();}}
+</script>
+
+<div class="deck">
+
+<!-- cover -->
+<div class="slide s-cover active">
+  <span class="cover-tag">コンプライアンス研修 ｜ 新入社員RS ｜ 2026年5月</span>
+  <h1>新入社員コンプライアンス研修</h1>
+  <p class="meta">保険代理店で働くために知っておくべきこと ｜ 所要時間：65分</p>
+  <img src="file:///Users/yamauchidaisuke/Desktop/Unicara/会社ロゴ/3.png" class="logo-cover" alt="Unicara">
+</div>
+
+<!-- why -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>なぜコンプライアンスが必要か</h2>
+  <div class="body"><div class="grid g3">
+    <div class="card am"><h3>金融庁の処分は毎年発生</h3><p>業務停止・登録取消し・募集人の登録抹消。代理店が一夜で営業できなくなる</p></div>
+    <div class="card am"><h3>「知らなかった」は通用しない</h3><p>法令違反には善意も無知も免責にならない。最大1年の懲役・刑事罰あり</p></div>
+    <div class="card am"><h3>本人も処分対象になる</h3><p>依頼した募集人個人も行政処分・損害賠償の対象。代理店だけの問題ではない</p></div>
+  </div>
+  <div class="box-b">📌 コンプライアンスは「守るべきルール」ではなく「顧客との信頼を守る土台」</div></div>
+</div>
+
+<!-- pain -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>実際に起きた違反のパターン（金融庁 処分事例より）</h2>
+  <div class="body"><div class="pain-list">
+    <div class="quote">登録手続き中のスタッフに「ちょっと説明してきて」と頼んだだけで業務停止処分を受けた<span class="src">— 無登録者による募集（保険業法第276条違反）</span></div>
+    <div class="quote">乗換えのメリットだけ伝えて解約返戻金の目減りを説明しなかった。後日顧客が気づいて苦情→行政処分<span class="src">— 不利益事実の不告知（第300条違反）</span></div>
+    <div class="quote">「絶対に損しません」と断言して変額保険を販売。運用損が出た時点で訴訟に発展<span class="src">— 断定的判断の提供（第300条違反）</span></div>
+  </div></div>
+</div>
+
+<!-- obj -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>今日のゴール（学習目標）</h2>
+  <div class="body"><div class="obj-list">
+    <div class="obj-item"><div class="obj-n">1</div><p class="obj-p">募集人・非募集人の違いを理解し、無登録者への依頼のNG境界線を引けるようになる</p></div>
+    <div class="obj-item"><div class="obj-n">2</div><p class="obj-p">禁止行為9つを具体的なNG例とともに説明できるようになる</p></div>
+    <div class="obj-item"><div class="obj-n">3</div><p class="obj-p">意向把握5ステップの流れを順番通りに実践できるようになる</p></div>
+    <div class="obj-item"><div class="obj-n">4</div><p class="obj-p">個人情報（特に要配慮情報）の取り扱いルールと漏洩時の対応を理解する</p></div>
+  </div></div>
+</div>
+
+<!-- agenda -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>本日のアジェンダ</h2>
+  <div class="body"><div class="agenda-grid">
+    <div class="a-card"><div class="a-num">MODULE 01</div><div class="a-label">募集人・非募集人の違い</div><div class="a-desc">無登録者にできること・できないことの境界線を理解する</div><div class="a-time">5〜18分</div></div>
+    <div class="a-card"><div class="a-num">MODULE 02</div><div class="a-label">禁止行為 9つ</div><div class="a-desc">保険業法第300条の禁止行為を具体例で完全網羅する</div><div class="a-time">18〜34分</div></div>
+    <div class="a-card"><div class="a-num">MODULE 03</div><div class="a-label">意向把握・情報提供義務</div><div class="a-desc">5ステップの流れと書面交付の実務ルールを押さえる</div><div class="a-time">34〜46分</div></div>
+    <div class="a-card"><div class="a-num">MODULE 04</div><div class="a-label">個人情報保護の実務</div><div class="a-desc">要配慮情報の管理・LINE/SNSルール・漏洩時対応</div><div class="a-time">46〜57分</div></div>
+  </div></div>
+</div>
+
+<!-- time -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>タイムテーブル</h2>
+  <div class="body"><div class="grid g2">
+    <div style="display:flex;flex-direction:column;gap:.38rem">
+      <div class="card ac" style="padding:.5rem .85rem;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">オープニング</h3><span style="font-size:.82rem;color:var(--muted)">0〜5分</span></div>
+      <div class="card" style="padding:.5rem .85rem;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Module 1：募集人・非募集人</h3><span style="font-size:.82rem;color:var(--muted)">5〜18分</span></div>
+      <div class="card" style="padding:.5rem .85rem;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Module 2：禁止行為9つ</h3><span style="font-size:.82rem;color:var(--muted)">18〜34分</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.38rem">
+      <div class="card" style="padding:.5rem .85rem;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Module 3：意向把握</h3><span style="font-size:.82rem;color:var(--muted)">34〜46分</span></div>
+      <div class="card" style="padding:.5rem .85rem;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">Module 4：個人情報保護</h3><span style="font-size:.82rem;color:var(--muted)">46〜57分</span></div>
+      <div class="card ac" style="padding:.5rem .85rem;display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">確認テスト（10問）</h3><span style="font-size:.82rem;color:var(--muted)">57〜65分</span></div>
+    </div>
+  </div>
+  <div class="box-b">📌 確認テストは80点（8問以上正解）で合格。わからない点は各Moduleでメモしておく</div></div>
+</div>
+
+<!-- divider Module 1 -->
+<div class="slide s-div">
+  <div class="div-bg">01</div>
+  <div class="div-chip">Module 1</div>
+  <h2>募集人・非募集人でできることの違い</h2>
+  <p class="div-sub">保険業法第276条 ｜ 無登録募集の禁止</p>
+</div>
+
+<!-- concept -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>「募集人」と「非募集人」とは</h2>
+  <div class="body"><div class="concept-wrap">
+    <div class="concept-claim">登録完了通知が届いていない人に、保険の説明・勧誘・申込み案内をさせてはいけない</div>
+    <div class="ev-row">
+      <div class="ev-card"><h3>✅ 募集人（皆さん）</h3><p>一般課程試験合格＋保険会社登録完了。入社と同時に登録完了済み</p></div>
+      <div class="ev-card"><h3>非募集人とは</h3><p>試験未受験・登録手続き中・事務スタッフ等。登録完了通知が届くまでは全員該当</p></div>
+      <div class="ev-card"><h3>登録は会社ごとに必要</h3><p>A社登録のみではB社商品を募集できない。取扱保険会社ごとに個別登録が必要</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- cmp NG/OK -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>無登録者への依頼：NG vs OK</h2>
+  <div class="body"><div class="grid g2">
+    <div class="card rd"><h3>✗ NGな依頼（保険業法第276条違反）</h3><ul>
+      <li>移管・乗換えを勧誘させる</li><li>具体的な保険商品を説明させる</li>
+      <li>設計書を顧客にメールで送らせる（送付だけでも違反）</li>
+      <li>申込書・告知書の記入を案内させる</li><li>保険料を受け取らせる</li>
+    </ul></div>
+    <div class="card gr"><h3>○ OKな依頼</h3><ul>
+      <li>保険の仕組みの一般論を話す</li><li>面談日程の調整・担当者への取次ぎ</li>
+      <li>「住所変更は保険会社へご連絡を」程度の保全一般案内</li>
+      <li>資料の物理的な受け渡し（説明なし）</li><li>事務・書類整理</li>
+    </ul></div>
+  </div>
+  <div class="box-a">⚠️ 判断軸：「顧客の意思決定に影響するか？」→ YESなら募集人がやる</div></div>
+</div>
+
+<!-- quiz -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>○×クイズ — 非募集人スタッフへの依頼</h2>
+  <div class="body"><div style="display:flex;flex-direction:column;gap:.46rem">
+    <div class="qi"><span>Q1. 顧客に「生命保険に興味はありますか？」と聞かせた</span><span class="ans ng">✗ NG</span></div>
+    <div class="qi"><span>Q2. 「担当者からご説明します」とアポを取らせた</span><span class="ans ok">○ OK</span></div>
+    <div class="qi"><span>Q3. 自分が作成した設計書を顧客にメールで送らせた</span><span class="ans ng">✗ NG</span></div>
+    <div class="qi"><span>Q4. 「終身保険ってどんな仕組み？」に一般論を説明させた</span><span class="ans ok">○ OK</span></div>
+    <div class="qi"><span>Q5. 申込書の記入の仕方を案内させた</span><span class="ans ng">✗ NG</span></div>
+  </div>
+  <div class="box-a">⚠️ Q3：「送るだけ」でも違反。設計書の転送1本が業務停止事案になりうる</div></div>
+</div>
+
+<!-- take Module 1 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>Module 1 まとめ</h2>
+  <div class="body"><div class="take-box">
+    <div class="take-item"><div class="take-n">1</div><span>「説明する・勧める・特定商品に誘導する」は無登録者にさせてはいけない</span></div>
+    <div class="take-item"><div class="take-n">2</div><span>「つなぐ・整理する・一般論を話す」はOK。迷ったら顧客の意思決定に影響するかで判断</span></div>
+    <div class="take-item"><div class="take-n">3</div><span>設計書のメール転送1本でも違反。「ちょっとお願いした」では済まない</span></div>
+    <div class="take-item"><div class="take-n">4</div><span>将来スタッフが入ったら「登録完了通知が届くまで募集NG」を必ず指導する</span></div>
+  </div></div>
+</div>
+
+<!-- divider Module 2 -->
+<div class="slide s-div">
+  <div class="div-bg">02</div>
+  <div class="div-chip">Module 2</div>
+  <h2>禁止行為 9つ</h2>
+  <p class="div-sub">保険業法第300条 ｜ 共通原則：顧客が正しく判断できる環境を作ること</p>
+</div>
+
+<!-- concept 禁止行為 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>禁止行為とは</h2>
+  <div class="body"><div class="concept-wrap">
+    <div class="concept-claim">「顧客が正しく判断できる環境を作ること」― これがすべての根本。これを歪める行為が禁止行為</div>
+    <div class="ev-row">
+      <div class="ev-card"><h3>処罰の重さ</h3><p>行政処分・損害賠償・刑事罰（最大1年の懲役）。「知らなかった」は免責にならない</p></div>
+      <div class="ev-card"><h3>善意でも違反</h3><p>好意のつもりのギフト・自腹負担も特別利益提供として違反になる</p></div>
+      <div class="ev-card"><h3>9つすべて覚える</h3><p>①虚偽 ②不告知 ③誤解比較 ④不当乗換 ⑤告知唆し ⑥特別利益 ⑦威迫 ⑧誹謗 ⑨誤認</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- 禁止行為 ①②③ -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>禁止行為 ①〜③</h2>
+  <div class="body"><div class="grid g3">
+    <div class="card rd"><h3>① 虚偽説明・断定的判断</h3><ul>
+      <li>変額保険で「元本保証です」</li><li>「絶対に損しません」「銀行より絶対有利」</li>
+      <li>不確実なことは「可能性があります」と表現</li>
+    </ul></div>
+    <div class="card rd"><h3>② 不利益事実の不告知</h3><ul>
+      <li>解約返戻金の目減りを言わずに乗換えを勧める</li>
+      <li>免責期間・対象外手術を省略する</li><li>沈黙も不告知に当たる</li>
+    </ul></div>
+    <div class="card rd"><h3>③ 誤解させる比較・説明</h3><ul>
+      <li>根拠不明の「業界No.1」</li>
+      <li>保険料の安さだけ強調した比較資料</li><li>事実でも誤解を招く表現は違反</li>
+    </ul></div>
+  </div>
+  <div class="box-b">📌 共通：有利・不利の両方を、客観的根拠とともに説明することが義務</div></div>
+</div>
+
+<!-- 禁止行為 ④⑤⑥ -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>禁止行為 ④〜⑥</h2>
+  <div class="body"><div class="grid g3">
+    <div class="card rd"><h3>④ 不当乗換勧誘</h3><ul>
+      <li>不利益説明なしで「入り直しましょう」</li>
+      <li>解約控除・不利益を隠して手続き</li>
+      <li>乗換え前の不利益説明が必須</li>
+    </ul></div>
+    <div class="card rd"><h3>⑤ 告知義務違反の唆し</h3><ul>
+      <li>「持病は書かなくていい」「省略して」</li>
+      <li>→ 契約解除・保険金不払い・代理店処分</li>
+      <li>告知内容に口を出してはいけない</li>
+    </ul></div>
+    <div class="card rd"><h3>⑥ 特別利益の提供</h3><ul>
+      <li>保険料立替・ギフト券・自腹負担</li>
+      <li>「好意のつもり」「自腹」は関係ない</li>
+      <li>2025年改正でさらに規制強化</li>
+    </ul></div>
+  </div>
+  <div class="box-a">⚠️ ④は乗換え自体がNGではない。不利益説明なしに勧めることがNG</div></div>
+</div>
+
+<!-- 禁止行為 ⑦⑧⑨ -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>禁止行為 ⑦〜⑨</h2>
+  <div class="body"><div class="grid g3">
+    <div class="card rd"><h3>⑦ 威迫・地位の不当利用</h3><ul>
+      <li>「今日決めてもらわないと困る」</li>
+      <li>取引先に「保険に入らないなら取引考え直す」</li>
+      <li>顧客が自由に断れる環境を守る</li>
+    </ul></div>
+    <div class="card rd"><h3>⑧ 誹謗・中傷</h3><ul>
+      <li>特定会社を根拠なく中傷する</li>
+      <li>格付け記事・雑誌コピーを渡すだけでも違反</li>
+      <li>比較は客観的事実に基づいて</li>
+    </ul></div>
+    <div class="card rd"><h3>⑨ 保険種類等の誤認</h3><ul>
+      <li>A社と言いながらB社商品を販売</li>
+      <li>代理店名と保険会社名の混同</li>
+      <li>引受会社・商品種別は必ず正確に</li>
+    </ul></div>
+  </div>
+  <div class="box-b">📌 ⑧：記事コピーを「参考に」と渡すだけで違反になりうる</div></div>
+</div>
+
+<!-- take Module 2 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>Module 2 まとめ</h2>
+  <div class="body"><div class="take-box">
+    <div class="take-item"><div class="take-n">1</div><span>禁止行為の根本：「顧客が正しく判断できる環境を作ること」を歪める行為がすべて違反</span></div>
+    <div class="take-item"><div class="take-n">2</div><span>断定・虚偽・不告知・誤解を招く比較 → 説明の仕方の問題</span></div>
+    <div class="take-item"><div class="take-n">3</div><span>不当乗換・告知唆し・特別利益 → 手続きの問題</span></div>
+    <div class="take-item"><div class="take-n">4</div><span>威迫・誹謗・誤認 → 顧客との関係性・行為の問題</span></div>
+  </div></div>
+</div>
+
+<!-- divider Module 3 -->
+<div class="slide s-div">
+  <div class="div-bg">03</div>
+  <div class="div-chip">Module 3</div>
+  <h2>意向把握・情報提供義務</h2>
+  <p class="div-sub">保険業法第294条・第294条の2 ｜ 意向把握は必ず最初に</p>
+</div>
+
+<!-- concept 意向把握 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>意向把握義務とは</h2>
+  <div class="body"><div class="concept-wrap">
+    <div class="concept-claim">先に商品を決めてから話を合わせることは義務違反。意向把握は必ず最初に行う</div>
+    <div class="ev-row">
+      <div class="ev-card"><h3>なぜ必要か</h3><p>顧客が本当に必要とする保険と異なる商品を売ることを防ぐため。未実施は行政処分・苦情の原因</p></div>
+      <div class="ev-card"><h3>乗合代理店の義務</h3><p>複数社を取り扱う代理店は推奨理由を明確に記録する義務がある</p></div>
+      <div class="ev-card"><h3>よくあるNG</h3><p>「とりあえず申込書だけ」「この商品がおすすめ」と先に決める。どちらも違反</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- process 5ステップ -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>意向把握の5ステップ</h2>
+  <div class="body"><div class="step-flow">
+    <div class="step"><div class="sn">1</div><div class="sb key"><h3>意向把握</h3><p>加入目的・予算・家族構成・既契約をヒアリングして記録する（必ず最初）</p></div></div>
+    <div class="step"><div class="sn">2</div><div class="sb"><h3>商品選定</h3><p>複数商品を比較。乗合代理店は推奨理由を明確に記録する義務あり</p></div></div>
+    <div class="step"><div class="sn">3</div><div class="sb"><h3>商品説明</h3><p>保障内容・免責・解約控除・リスクを正確に説明。書面交付漏れは重大違反</p></div></div>
+    <div class="step"><div class="sn">4</div><div class="sb key"><h3>意向確認</h3><p>意向と契約内容の整合性を最終確認し、意向確認書に署名を得る（説明と同時交付）</p></div></div>
+    <div class="step"><div class="sn">5</div><div class="sb"><h3>契約締結</h3><p>申込書記入・告知適正取得・クーリングオフ案内</p></div></div>
+  </div>
+  <div class="box-a">⚠️ 意向確認書の後日郵送はNG。説明と同時交付が原則</div></div>
+</div>
+
+<!-- take Module 3 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>Module 3 まとめ</h2>
+  <div class="body"><div class="take-box">
+    <div class="take-item"><div class="take-n">1</div><span>意向把握は必ず最初。先に商品を決めてから話を合わせるのは義務違反</span></div>
+    <div class="take-item"><div class="take-n">2</div><span>書類は「渡す＋説明する＋記録する」がセット。渡すだけはNG</span></div>
+    <div class="take-item"><div class="take-n">3</div><span>意向確認書の署名は説明と同時。後日郵送・後回しはアウト</span></div>
+    <div class="take-item"><div class="take-n">4</div><span>乗合代理店は推奨理由の記録が特に厳しく義務付けられている</span></div>
+  </div></div>
+</div>
+
+<!-- divider Module 4 -->
+<div class="slide s-div">
+  <div class="div-bg">04</div>
+  <div class="div-chip">Module 4</div>
+  <h2>個人情報保護の実務ルール</h2>
+  <p class="div-sub">個人情報保護法 ｜ 要配慮個人情報の特別管理</p>
+</div>
+
+<!-- concept 個人情報 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>保険業務が扱う個人情報の特殊性</h2>
+  <div class="body"><div class="concept-wrap">
+    <div class="concept-claim">保険申込書・告知書には「要配慮個人情報」が含まれる。通常の書類より格段に厳格な管理が必要</div>
+    <div class="ev-row">
+      <div class="ev-card"><h3>通常の個人情報</h3><p>氏名・住所・電話番号・メールアドレス</p></div>
+      <div class="ev-card"><h3>要配慮個人情報</h3><p>病歴・健康状態・障害の有無。取得に明示的同意が必要。第三者提供は原則禁止</p></div>
+      <div class="ev-card"><h3>漏洩した場合</h3><p>個人情報保護法上の報告義務あり。隠蔽は最悪の対応。すぐ上長報告が鉄則</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- rule 日常ルール -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>日常業務での個人情報ルール</h2>
+  <div class="body"><div class="grid g3">
+    <div class="card ac"><h3>書類の管理</h3><ul><li>鍵付きの場所に保管</li><li>廃棄はシュレッダー</li><li>他の顧客が見える場所に置かない</li></ul></div>
+    <div class="card ac"><h3>PC・スマホ</h3><ul><li>画面ロック必須</li><li>会社支給デバイスのみ使用</li><li>個人クラウドへの保存NG</li></ul></div>
+    <div class="card ac"><h3>外出時</h3><ul><li>持ち出し記録をつける</li><li>電車・カフェで声に出さない</li><li>鞄から出したまま離席しない</li></ul></div>
+  </div>
+  <div class="grid g2" style="gap:.55rem">
+    <div class="card am"><h3>LINE</h3><p>会社承認アカウントのみ。個人LINEで契約情報・健康情報を送らない。申込書の写真送受信NG</p></div>
+    <div class="card rd"><h3>SNS</h3><p>顧客名・情報の投稿NG（仮名も不可）。「今日〇〇さんの契約が取れた」もNG</p></div>
+  </div></div>
+</div>
+
+<!-- process 漏洩対応 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>情報漏洩が起きたら</h2>
+  <div class="body"><div class="step-flow">
+    <div class="step"><div class="sn">1</div><div class="sb key"><h3>すぐに上長・内部管理責任者に報告</h3><p>自分で「大丈夫だろう」と判断して隠すことが最悪の対応</p></div></div>
+    <div class="step"><div class="sn">2</div><div class="sb"><h3>状況を記録する</h3><p>いつ・何が・どのように漏洩したかを記録する</p></div></div>
+    <div class="step"><div class="sn">3</div><div class="sb warn"><h3>被害を広げない行動をとる</h3><p>デバイス隔離・アカウントロック等。証拠を勝手に削除しない</p></div></div>
+    <div class="step"><div class="sn">4</div><div class="sb"><h3>会社の指示に従って対応</h3><p>個人判断での顧客連絡・謝罪は避ける。個人情報保護法上の報告義務もある</p></div></div>
+  </div></div>
+</div>
+
+<!-- take Module 4 -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>Module 4 まとめ</h2>
+  <div class="body"><div class="take-box">
+    <div class="take-item"><div class="take-n">1</div><span>保険業は要配慮個人情報（病歴・健康情報）を扱う。通常より厳格な管理が必要</span></div>
+    <div class="take-item"><div class="take-n">2</div><span>個人LINEでの申込書・健康情報の送受信は禁止。会社承認アカウントのみ使用</span></div>
+    <div class="take-item"><div class="take-n">3</div><span>SNSは顧客名・仮名・成約報告すべてNG。個人アカウントも例外ではない</span></div>
+    <div class="take-item"><div class="take-n">4</div><span>漏洩したらすぐ上長報告。自分で隠すことが最も悪い対応</span></div>
+  </div></div>
+</div>
+
+<!-- model まとめ -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>本日のまとめ</h2>
+  <div class="body"><div class="grid g2">
+    <div class="card ac"><h3>Module 1 募集人・非募集人</h3><p>「説明・勧める・誘導」はNG。「つなぐ・整理・一般論」はOK。設計書転送1本でアウト</p></div>
+    <div class="card ac"><h3>Module 2 禁止行為9つ</h3><p>根本：顧客が正しく判断できる環境を作ること。「知らなかった」は通用しない</p></div>
+    <div class="card ac"><h3>Module 3 意向把握</h3><p>意向把握は必ず最初。書類は渡す＋説明する＋記録するがセット</p></div>
+    <div class="card ac"><h3>Module 4 個人情報</h3><p>要配慮情報は特別管理。漏洩したらすぐ上長報告。隠蔽が最悪</p></div>
+  </div>
+  <div class="box-b">📌 すべての根本：「顧客の利益を最優先に、正直に、正確に」</div></div>
+</div>
+
+<!-- action 確認テスト -->
+<div class="slide s-content">
+  <div style="height:4px;background:var(--brand);flex-shrink:0"></div><h2>確認テスト</h2>
+  <div class="body"><div class="concept-wrap">
+    <div class="concept-claim">10問・合格ライン80点（8問以上正解）</div>
+    <div class="ev-row">
+      <div class="ev-card"><h3>○×問題（7問）</h3><p>問1〜7：各Moduleの重要ポイントを○×で確認</p></div>
+      <div class="ev-card"><h3>選択問題（3問）</h3><p>問8〜10：具体的な場面での正しい対応を選択</p></div>
+      <div class="ev-card"><h3>合格したら</h3><p>研修受講記録・確認テスト結果を提出。不合格の場合は再受講</p></div>
+    </div>
+  </div></div>
+</div>
+
+<!-- qa -->
+<div class="slide s-qa">
+  <h2>Q &amp; A</h2>
+  <p>疑問点・確認したいことを自由に質問してください</p>
+</div>
+
+<!-- end -->
+<div class="slide s-end">
+  <h2>研修終了</h2>
+  <p>お疲れ様でした。確認テストに進んでください。</p>
+</div>
+
+</div>
+<nav class="nav">
+  <button class="btn" id="prev" disabled>‹</button>
+  <span class="cnt" id="c"></span>
+  <button class="btn" id="next">›</button>
+  <button class="edit-btn" id="editBtn">編集</button>
+  <button class="save-btn" id="saveBtn">HTMLを保存</button>
+</nav>
+<script>
+const slides=document.querySelectorAll('.slide');
+let cur=0,total=slides.length;
+function go(n){slides[cur].classList.remove('active');cur=Math.max(0,Math.min(n,total-1));slides[cur].classList.add('active');document.getElementById('c').textContent=`${cur+1} / ${total}`;document.getElementById('prev').disabled=cur===0;document.getElementById('next').disabled=cur===total-1;}
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>go(cur+1);
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+go(0);
+let editMode=false;
+const editBtn=document.getElementById('editBtn');
+const saveBtn=document.getElementById('saveBtn');
+const SELS='h1,h2,h3,p,.cover-tag,.div-chip,.div-sub,.box-a,.box-b,.obj-p,.take-item,.concept-claim,.a-label,.a-desc';
+function toggleEdit(){editMode=!editMode;document.querySelectorAll(SELS).forEach(el=>{el.contentEditable=editMode?'true':'false';});editBtn.textContent=editMode?'編集終了':'編集';editBtn.classList.toggle('on',editMode);saveBtn.style.display=editMode?'inline-block':'none';}
+function saveHTML(){document.querySelectorAll(SELS).forEach(el=>el.removeAttribute('contenteditable'));editMode=false;editBtn.textContent='編集';editBtn.classList.remove('on');saveBtn.style.display='none';const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;const blob=new Blob([html],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=document.title+'.html';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+editBtn.onclick=toggleEdit;
+saveBtn.onclick=saveHTML;
+</script>
+</body>
+</html>
