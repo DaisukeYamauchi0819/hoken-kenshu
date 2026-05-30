@@ -47,9 +47,9 @@ li::before{content:'▸';color:var(--brand);font-size:.78em;position:absolute;le
 .sub{padding-left:1.2rem}
 
 .grid{display:grid;gap:.75rem}
-.g2{grid-template-columns:1fr 1fr}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g4{grid-template-columns:repeat(4,1fr)}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 
 .card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:.85rem 1rem}
 .card h3{font-size:clamp(.88rem,1.38vw,1.08rem);font-weight:700;color:var(--bdd);margin-bottom:.38rem}
